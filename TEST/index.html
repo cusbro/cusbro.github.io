@@ -45,7 +45,7 @@ text {
 
 h1 {
     display: table;
-    font: 40px sans-serif;
+    font: 30px sans-serif;
     text-align: centre;
     margin: 0 auto;
 }
@@ -54,10 +54,12 @@ h1 {
     margin: 0 auto;
 }
 
-#mainInfo {
+#descwindow {
     font: 15px sans-serif;
     text-align: center;
     margin: 0 auto;
+    display: none;
+    background-color: #ffffff;
 
 }
 
@@ -69,8 +71,9 @@ h1 {
     </div>
     <div id="mainDiagram" style="width:800px">
     </div>
-    <div id="mainInfo" style="width:100%">
-        <p> information</p>
+    <div id="descwindow" style="width:60%;display:none">
+        <h2 id="desctitle"></h2>
+        <p id="descdesc"></p>
     </div>
 </body>
 <script src="http://d3js.org/d3.v3.min.js"></script>
@@ -147,7 +150,7 @@ data.forEach(function(d){
 		
         if (o == null)
 		{
-			o = { name: d_curr[1],	id: 'o' + d_curr[0], desc: d_curr[1], related_links: [] };
+			o = { name: d_curr[1],	id: 'o' + d_curr[0], desc: d_curr[2], related_links: [] };
 			o.related_nodes = [o.id];
 			outerId[0] = outerId[0] + 1;	
 			
@@ -305,7 +308,8 @@ var onode = svg.append('g').selectAll(".outer_node")
     .attr("class", "outer_node")
     .attr("transform", function(d) { return "rotate(" + (d.x - 90) + ")translate(" + d.y + ")"; })
     .on("mouseover", mouseover)
-    .on("mouseout", mouseout);
+    .on("mouseout", mouseout)
+    .on("click", click);
   
 onode.append("circle")
     .attr('id', function(d) { return d.id })
@@ -331,7 +335,8 @@ var inode = svg.append('g').selectAll(".inner_node")
     .attr("class", "inner_node")
     .attr("transform", function(d, i) { return "translate(" + d.x +  "," + d.y + ")"})
     .on("mouseover", mouseover)
-    .on("mouseout", mouseout);
+    .on("mouseout", mouseout)
+    .on("click", click);
   
 inode.append('rect')
     .attr('width', rect_width)
@@ -375,6 +380,26 @@ function mouseout(d)
     for (var i = 0; i < d.related_links.length; i++)
         d3.select('#' + d.related_links[i]).attr('stroke-width', link_width);
 }
+
+function click(d)
+{
+   // console.log(d);
+    descbox = document.getElementById("descwindow");
+    descboxtitle = document.getElementById("desctitle");
+    descboxdesc = document.getElementById("descdesc");
+   // descbox.getElementById("desctitle") = "hello";
+   console.log(d);
+   descboxtitle.innerHTML = d.name;
+   descboxdesc.innerHTML = d.desc ; 
+
+
+    if (descbox.style.display === 'none')
+        descbox.style.display = 'block';
+    //else
+      //  descbox.style.display = 'none';
+
+}
+
 
 </script>
 
