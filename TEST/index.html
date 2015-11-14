@@ -65,9 +65,9 @@ h1 {
 
 </style>	
 </head>
-<body bgcolor="#D9E9FF" style="width:1000px">
-    <div id="header" class="header1" style="width:100%">
-        <h1 class="header1">GOTO2015 - The Bottled Water Solution Landscape</h1>
+<body id="mainBody" bgcolor="#D9E9FF" style="width:1000px">
+    <div id="header" style="width:100%">
+        <h1 >GOTO2015 - The Bottled Water Solution Landscape</h1>
     </div>
     <div id="mainDiagram" style="width:800px">
     </div>
@@ -309,7 +309,7 @@ var onode = svg.append('g').selectAll(".outer_node")
     .attr("transform", function(d) { return "rotate(" + (d.x - 90) + ")translate(" + d.y + ")"; })
     .on("mouseover", mouseover)
     .on("mouseout", mouseout)
-    .on("click", click);
+    .on("click", nodeclick);
   
 onode.append("circle")
     .attr('id', function(d) { return d.id })
@@ -336,7 +336,7 @@ var inode = svg.append('g').selectAll(".inner_node")
     .attr("transform", function(d, i) { return "translate(" + d.x +  "," + d.y + ")"})
     .on("mouseover", mouseover)
     .on("mouseout", mouseout)
-    .on("click", click);
+    .on("click", nodeclick);
   
 inode.append('rect')
     .attr('width', rect_width)
@@ -354,6 +354,8 @@ inode.append("text")
 
 d3.select(self.frameElement).style("height", diameter + 150 + "px");
 
+var mouseOverElement = false;
+
 function mouseover(d)
 {
 	// bring to front
@@ -367,10 +369,12 @@ function mouseover(d)
     
     for (var i = 0; i < d.related_links.length; i++)
         d3.select('#' + d.related_links[i]).attr('stroke-width', '5px');
+    mouseOverElement = true;
 }
 
 function mouseout(d)
 {   	
+    mouseOverElement = false;
     for (var i = 0; i < d.related_nodes.length; i++)
     {
         d3.select('#' + d.related_nodes[i]).classed('highlight', false);
@@ -381,16 +385,15 @@ function mouseout(d)
         d3.select('#' + d.related_links[i]).attr('stroke-width', link_width);
 }
 
-function click(d)
+function nodeclick(d)
 {
-   // console.log(d);
     descbox = document.getElementById("descwindow");
     descboxtitle = document.getElementById("desctitle");
     descboxdesc = document.getElementById("descdesc");
-   // descbox.getElementById("desctitle") = "hello";
-   console.log(d);
-   descboxtitle.innerHTML = d.name;
-   descboxdesc.innerHTML = d.desc ; 
+
+
+    descboxtitle.innerHTML = d.name;
+    descboxdesc.innerHTML = d.desc ; 
 
 
     if (descbox.style.display === 'none')
@@ -400,6 +403,22 @@ function click(d)
 
 }
 
+
+function backgroundclick(d)
+{
+    console.log(d);
+    if (mouseOverElement === true)
+        return
+
+
+    descbox = document.getElementById("descwindow");
+
+    if (descbox.style.display === 'block')
+        descbox.style.display = 'none';
+}
+
+body = document.getElementById("mainBody");
+body.setAttribute("onclick", "javascript:backgroundclick();");
 
 </script>
 
