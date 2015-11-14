@@ -62,13 +62,16 @@ text {
 
 
 var data = [
-["Solution 1", ["Industry", "Consumers"]], 
-["Solution 2", ["Consumers", "Government"]],
-["Solution 3", ["Consumers", "Social", "Government"]],
-["Solution 4", ["Competition", "Government"]],
-["Solution 5", ["Competition", "Social", "Government"]],
-["Solution 6", ["Industry", "Consumers", "Government", "Social", "Competition"]],
-["Solution 7", ["Consumers", "Government"]],
+[["1" , "Solution 1", "Government", "IpsoFacto blah blah blah blah" ], ["Industry", "Consumers"]], 
+[["2" , "Solution 2", "Government", "IpsoFacto blah blah blah blah" ], ["Consumers", "Government"]],
+[["3" , "Solution 3", "Government", "IpsoFacto blah blah blah blah" ], ["Consumers", "Social", "Government"]],
+[["4" , "Solution 4", "Social", "IpsoFacto blah blah blah blah" ], ["Competition", "Government"]],
+[["5" , "Solution 5", "Social", "IpsoFacto blah blah blah blah" ], ["Competition", "Social", "Government"]],
+[["6" , "Solution 6", "Social", "IpsoFacto blah blah blah blah" ], ["Industry", "Consumers", "Government", "Social", "Competition"]],
+[["7" , "Solution 7", "Economic", "IpsoFacto blah blah blah blah" ], ["Consumers", "Government"]],
+[["8" , "Solution 8", "Economic", "IpsoFacto blah blah blah blah" ], ["Industry", "Consumers"]], 
+[["9" , "Solution 9", "Economic", "IpsoFacto blah blah blah blah" ], ["Consumers", "Government"]],
+[["10", "Solution 10", "Economic", "IpsoFacto blah blah blah blah" ], ["Consumers", "Social", "Government"]],
 ]
 
 
@@ -92,7 +95,7 @@ data.forEach(function(d){
 	if (d == null)
 		return;
 	
-	i = { id: 'i' + inner.length, name: d[0], related_links: [] };
+	i = { id:  "i" + d[0][0], name: d[0][1], type: d[0][2], desc: d[0][3], related_links: [] };
 	i.related_nodes = [i.id];
 	inner.push(i);
 	
@@ -149,18 +152,13 @@ for (var i = 0; i < data.outer.length; ++i)
 console.log(data.outer.reduce(function(a,b) { return a + b.related_links.length; }, 0) / data.outer.length);
 
 
-// from d3 colorbrewer: 
-// This product includes color specifications and designs developed by Cynthia Brewer (http://colorbrewer.org/).
-var colors = ["#a50026","#d73027","#f46d43","#fdae61","#fee090","#ffffbf","#e0f3f8","#abd9e9","#74add1","#4575b4","#313695"]
-var color = d3.scale.linear()
-    .domain([60, 220])
-    .range([colors.length-1, 0])
-    .clamp(true);
+
 
 var diameter = 960;
 var rect_width = 100;
 var rect_height = 20;
-var circ_radius = 80
+var rect_gap = 0;
+var circ_radius = 80;
 
 var link_width = "1px"; 
 
@@ -194,14 +192,29 @@ data.inner = data.inner.map(function(d, i) {
     return d;
 });
 
+// from d3 colorbrewer: 
+// This product includes color specifications and designs developed by Cynthia Brewer (http://colorbrewer.org/).
 
 function get_color(name)
 {
-    var c = Math.round(color(name));
-    if (isNaN(c))
-        return '#dddddd';	// fallback color
+    var color = '#dddddd';
+    switch(name) {
+        case "Government":
+            color =  "#fdc086";
+            break;
+        case "Social":
+            color =  "#7fc97f";
+            break;
+        case "Economic":
+            color =  "#beaed4";
+            break;
+            color = "#dddddd"
+        }
+
+//    if (isNaN(name))
+  //      return '#dddddd';	// fallback color
     
-    return colors[c];
+    return color;
 }
 
 // Can't just use d3.svg.diagonal because one edge is in normal space, the
@@ -236,7 +249,7 @@ var link = svg.append('g').attr('class', 'links').selectAll(".link")
     .attr('class', 'link')
     .attr('id', function(d) { return d.id })
     .attr("d", diagonal)
-    .attr('stroke', function(d) { return get_color(d.inner.name); })
+    .attr('stroke', function(d) { return get_color(d.inner.type); })
     .attr('stroke-width', link_width);
 
 // outer nodes
@@ -270,7 +283,7 @@ var inode = svg.append('g').selectAll(".inner_node")
     .data(data.inner)
   .enter().append("g")
     .attr("class", "inner_node")
-    .attr("transform", function(d, i) { return "translate(" + d.x + "," + d.y + ")"})
+    .attr("transform", function(d, i) { return "translate(" + d.x +  "," + (d.y + rect_gap) + ")"})
     .on("mouseover", mouseover)
     .on("mouseout", mouseout);
   
@@ -278,7 +291,7 @@ inode.append('rect')
     .attr('width', rect_width)
     .attr('height', rect_height)
     .attr('id', function(d) { return d.id; })
-    .attr('fill', function(d) { return get_color(d.name); });
+    .attr('fill', function(d) { return get_color(d.type); });
   
 inode.append("text")
 	.attr('id', function(d) { return d.id + '-txt'; })
