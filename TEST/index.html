@@ -261,7 +261,7 @@ onode.append("text")
 	.attr('id', function(d) { return d.id + '-txt'; })
     .attr("dy", ".31em")
     .attr("text-anchor", "middle")
-    //.attr("transform", function(d) { return d.x < 180 ? "translate(8)" : "rotate(180)translate(-8)"; })
+    .attr("transform", function(d) { return d.x < 180 ? "translate(8)" : "rotate(180)translate(-8)"; })
     .text(function(d) { return d.name; });
   
 // inner nodes
