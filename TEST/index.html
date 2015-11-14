@@ -245,8 +245,7 @@ var onode = svg.append('g').selectAll(".outer_node")
     .data(data.outer)
   .enter().append("g")
     .attr("class", "outer_node")
-    //.attr("transform", function(d) { return "rotate(" + (d.x - 90) + ")translate(" + d.y + ")"; })
-    .attr("transform", function(d) { return "rotate(" + (0) + ")translate(" + d.y + ")"; })
+    .attr("transform", function(d) { return "rotate(" + (d.x - 90) + ")translate(" + d.y + ")"; })
     .on("mouseover", mouseover)
     .on("mouseout", mouseout);
   
@@ -262,7 +261,7 @@ onode.append("text")
 	.attr('id', function(d) { return d.id + '-txt'; })
     .attr("dy", ".31em")
     .attr("text-anchor", "middle")
-    .attr("transform", function(d) { return d.x < 180 ? "translate(8)" : "rotate(180)translate(-8)"; })
+    .attr("transform", function(d) { return d.x < 180 ? "" : "rotate(" (180 - (d.x - 90)) ")"; })
     .text(function(d) { return d.name; });
   
 // inner nodes
