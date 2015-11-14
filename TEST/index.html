@@ -158,8 +158,8 @@ var color = d3.scale.linear()
     .clamp(true);
 
 var diameter = 960;
-var rect_width = 40;
-var rect_height = 14;
+var rect_width = 100;
+var rect_height = 20;
 
 var link_width = "1px"; 
 
@@ -260,7 +260,7 @@ onode.append("text")
 	.attr('id', function(d) { return d.id + '-txt'; })
     .attr("dy", ".31em")
     .attr("text-anchor", "middle")
-    .attr("transform", function(d) { return d.x < 180 ? "translate(0)" : "rotate(" -(d.x - 90) ")translate(0)"; })
+    .attr("transform", function(d) { return d.x < 180 ? "translate(0)" : "rotate(" 360-(d.x - 90) ")translate(0)"; })
     .text(function(d) { return d.name; });
   
 // inner nodes
@@ -282,7 +282,7 @@ inode.append('rect')
 inode.append("text")
 	.attr('id', function(d) { return d.id + '-txt'; })
     .attr('text-anchor', 'middle')
-    .attr("transform", "translate(" + rect_width/2 + ", " + rect_height * .75 + ")")
+    .attr("transform", "translate(" + (2 + rect_width)/2 + ", " + rect_height * .75 + ")")
     .text(function(d) { return d.name; });
 
 // need to specify x/y/etc
