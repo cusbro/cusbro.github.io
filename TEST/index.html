@@ -29,14 +29,14 @@ text {
 .outer_node circle {
     fill: #fff;
     stroke: steelblue;
-    stroke-width: 4px;
+    stroke-width: 2px;
     pointer-events: all;
 }
 
 .outer_node circle.highlight
 {
     stroke: #315B7E;
-    stroke-width: 10px;
+    stroke-width: 5px;
 }
 
 .link {
@@ -62,12 +62,12 @@ text {
 
 
 var outer_data = [
-["In", "Industry"],
-["So", "Social"],
-["Cn", "Consumers"],
-["Go", "Government"],
-["Cp", "Competition"],
-["Me", "Media"]
+["In", "Industry", "Industry ins an industry"],
+["So", "Social", "Social is nice to have"],
+["Cn", "Consumers", "Consumers consumer consumable consumables"],
+["Go", "Government", "Grrr government"],
+["Cp", "Competition", "Grrrr competition"],
+["Me", "Media", "Eve Binder"]
 ]
 
 
@@ -114,15 +114,17 @@ data.forEach(function(d){
 	
 	d[1].forEach(function(d1){
 		
-		o = outer.get(d1);
+        var d_curr = search_2d(d1, outer_data);
+
+		o = outer.get(d_curr[1]); 
 		
-		if (o == null)
+        if (o == null)
 		{
-			o = { name: d1,	id: 'o' + outerId[0], related_links: [] };
+			o = { name: d_curr[1],	id: 'o' + d_curr[0], desc: d_curr[1], related_links: [] };
 			o.related_nodes = [o.id];
 			outerId[0] = outerId[0] + 1;	
 			
-			outer.set(d1, o);
+			outer.set(d_curr[1], o);
 		}
 		
 		// create the links
@@ -164,10 +166,10 @@ console.log(data.outer.reduce(function(a,b) { return a + b.related_links.length;
 
 
 
-var diameter = 1000;
+var diameter = 960;
 var rect_width = 100;
 var rect_height = 20;
-var circ_radius = 80;
+var circ_radius = 60;
 var circ_deg_offset = 30
 var circ_deg_squeeze = 10
 
@@ -223,6 +225,17 @@ function get_color(name)
   //      return '#dddddd';	// fallback color
     
     return color;
+}
+
+function search_2d(id, array)
+{
+    for (var i=0, len = array.length; i < len; i++) {
+        if (array[i][0] === id) {
+            return array[i];
+        }
+    }
+
+    return null;
 }
 
 // Can't just use d3.svg.diagonal because one edge is in normal space, the
@@ -283,7 +296,7 @@ onode.append("text")
     .attr("dy", ".31em")
     .attr("text-anchor", "middle")
     .attr("transform", function(d) { return "rotate(" + -(d.x - 90) + ")translate(0)"; })
-    .attr("font-size", "2em")
+    .attr("font-size", "1.2em")
     .text(function(d) { return d.name; });
   
 // inner nodes
