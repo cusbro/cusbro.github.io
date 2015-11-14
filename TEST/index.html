@@ -251,17 +251,17 @@ var onode = svg.append('g').selectAll(".outer_node")
   
 onode.append("circle")
     .attr('id', function(d) { return d.id })
-    .attr("r", 20);
+    .attr("r", 40);
   
 onode.append("circle")
-    .attr('r', 20)
+    .attr('r', 40)
     .attr('visibility', 'hidden');
   
 onode.append("text")
 	.attr('id', function(d) { return d.id + '-txt'; })
     .attr("dy", ".31em")
-    .attr("text-anchor", function(d) { return d.x < 180 ? "start" : "end"; })
-    .attr("transform", function(d) { return d.x < 180 ? "translate(8)" : "rotate(180)translate(-8)"; })
+    .attr("text-anchor", "middle")
+    //.attr("transform", function(d) { return d.x < 180 ? "translate(8)" : "rotate(180)translate(-8)"; })
     .text(function(d) { return d.name; });
   
 // inner nodes
