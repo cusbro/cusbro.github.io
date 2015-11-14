@@ -29,14 +29,14 @@ text {
 .outer_node circle {
     fill: #fff;
     stroke: steelblue;
-    stroke-width: 3px;
+    stroke-width: 4px;
     pointer-events: all;
 }
 
 .outer_node circle.highlight
 {
     stroke: #315B7E;
-    stroke-width: 2px;
+    stroke-width: 10px;
 }
 
 .link {
@@ -45,7 +45,7 @@ text {
 
 </style>	
 </head>
-<body>
+<body bgcolor="#D9E9FF">
 <script src="http://d3js.org/d3.v3.min.js"></script>
 <script>
 //
@@ -61,17 +61,27 @@ text {
 //
 
 
+var outer_data = [
+["In", "Industry"],
+["So", "Social"],
+["Cn", "Consumers"],
+["Go", "Government"],
+["Cp", "Competition"],
+["Me", "Media"]
+]
+
+
 var data = [
-[["1" , "Solution 1", "Government", "IpsoFacto blah blah blah blah" ], ["Industry", "Consumers"]], 
-[["2" , "Solution 2", "Government", "IpsoFacto blah blah blah blah" ], ["Consumers", "Government"]],
-[["3" , "Solution 3", "Government", "IpsoFacto blah blah blah blah" ], ["Consumers", "Social", "Government"]],
-[["4" , "Solution 4", "Social", "IpsoFacto blah blah blah blah" ], ["Competition", "Government"]],
-[["5" , "Solution 5", "Social", "IpsoFacto blah blah blah blah" ], ["Competition", "Social", "Government"]],
-[["6" , "Solution 6", "Social", "IpsoFacto blah blah blah blah" ], ["Industry", "Consumers", "Government", "Social", "Competition"]],
-[["7" , "Solution 7", "Economic", "IpsoFacto blah blah blah blah" ], ["Consumers", "Government"]],
-[["8" , "Solution 8", "Economic", "IpsoFacto blah blah blah blah" ], ["Industry", "Consumers"]], 
-[["9" , "Solution 9", "Economic", "IpsoFacto blah blah blah blah" ], ["Consumers", "Government"]],
-[["10", "Solution 10", "Economic", "IpsoFacto blah blah blah blah" ], ["Consumers", "Social", "Government"]],
+[["1" , "Solution 1", "Government", "IpsoFacto blah blah blah blah" ], ["In", "Cn"]], 
+[["2" , "Solution 2", "Government", "IpsoFacto blah blah blah blah" ], ["Cn", "Go"]],
+[["3" , "Solution 3", "Government", "IpsoFacto blah blah blah blah" ], ["Cn", "So", "Go"]],
+[["4" , "Solution 4", "Social", "IpsoFacto blah blah blah blah" ], ["Cp", "Go"]],
+[["5" , "Solution 5", "Social", "IpsoFacto blah blah blah blah" ], ["Cp", "So", "Go"]],
+[["6" , "Solution 6", "Social", "IpsoFacto blah blah blah blah" ], ["In", "Cn", "Go", "So", "Cp"]],
+[["7" , "Solution 7", "Economic", "IpsoFacto blah blah blah blah" ], ["Cn", "Go"]],
+[["8" , "Solution 8", "Economic", "IpsoFacto blah blah blah blah" ], ["In", "Cn"]], 
+[["9" , "Solution 9", "Economic", "IpsoFacto blah blah blah blah" ], ["Cn", "Go"]],
+[["10", "Solution 10", "Economic", "IpsoFacto blah blah blah blah" ], ["Cn", "So", "Go", "Me"]]
 ]
 
 
@@ -154,11 +164,12 @@ console.log(data.outer.reduce(function(a,b) { return a + b.related_links.length;
 
 
 
-var diameter = 960;
+var diameter = 1000;
 var rect_width = 100;
 var rect_height = 20;
-var rect_gap = 0;
 var circ_radius = 80;
+var circ_deg_offset = 30
+var circ_deg_squeeze = 10
 
 var link_width = "1px"; 
 
@@ -172,11 +183,8 @@ var inner_y = d3.scale.linear()
 mid = (data.outer.length/2.0)
 var outer_x = d3.scale.linear()
     .domain([0, mid, mid, data.outer.length])
-    .range([15, 170, 190 ,355]);
+    .range([circ_deg_offset + circ_deg_squeeze ,  180 + circ_deg_offset - circ_deg_squeeze*2, 180 + circ_deg_offset + circ_deg_squeeze , 360 + circ_deg_offset - circ_deg_squeeze*2]);
 
-var outer_y = d3.scale.linear()
-    .domain([0, data.outer.length])
-    .range([0, diameter / 2 - 120]);
 
 
 // setup positioning
@@ -199,7 +207,7 @@ function get_color(name)
 {
     var color = '#dddddd';
     switch(name) {
-        case "Government":
+        case "Go":
             color =  "#fdc086";
             break;
         case "Social":
@@ -275,6 +283,7 @@ onode.append("text")
     .attr("dy", ".31em")
     .attr("text-anchor", "middle")
     .attr("transform", function(d) { return "rotate(" + -(d.x - 90) + ")translate(0)"; })
+    .attr("font-size", "2em")
     .text(function(d) { return d.name; });
   
 // inner nodes
@@ -283,7 +292,7 @@ var inode = svg.append('g').selectAll(".inner_node")
     .data(data.inner)
   .enter().append("g")
     .attr("class", "inner_node")
-    .attr("transform", function(d, i) { return "translate(" + d.x +  "," + (d.y + rect_gap) + ")"})
+    .attr("transform", function(d, i) { return "translate(" + d.x +  "," + d.y + ")"})
     .on("mouseover", mouseover)
     .on("mouseout", mouseout);
   
