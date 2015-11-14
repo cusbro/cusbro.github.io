@@ -29,9 +29,7 @@ text {
 .outer_node circle {
     fill: #fff;
     stroke: steelblue;
-    stroke-width: 3px;
-    width: 100px;
-    height: 100px;
+    stroke-width: 2px;
     pointer-events: all;
 }
 
@@ -253,7 +251,7 @@ var onode = svg.append('g').selectAll(".outer_node")
   
 onode.append("circle")
     .attr('id', function(d) { return d.id })
-    .attr("r", 4.5);
+    .attr("r", 20);
   
 onode.append("circle")
     .attr('r', 20)
