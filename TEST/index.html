@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <head>
 	<meta charset="utf-8">
-	<meta name="name" content="Concept Map" />
-	<meta name="description" content="An abstract mapping for parameters. Works best if first tag is 'unique' among the tracklist, and the second tag applies to multiple tracks"/>
+	<meta name="name" content="Bottled Water Solutions Concept Map" />
+	<meta name="description" content="An abstract mapping of the bottled water solutions landscape"/>
 	<meta name="mintags" content="2" />
 	<meta name="maxtags" content="2" />
-	<title>Jam Cellar 2014-05-06</title>
+	<title>GOTO 2015 - Bottled Water</title>
 
 <style>
 
@@ -245,7 +245,8 @@ var onode = svg.append('g').selectAll(".outer_node")
     .data(data.outer)
   .enter().append("g")
     .attr("class", "outer_node")
-    .attr("transform", function(d) { return "rotate(" + (d.x - 90) + ")translate(" + d.y + ")"; })
+    //.attr("transform", function(d) { return "rotate(" + (d.x - 90) + ")translate(" + d.y + ")"; })
+    .attr("transform", function(d) { return "rotate(" + (0) + ")translate(" + d.y + ")"; })
     .on("mouseover", mouseover)
     .on("mouseout", mouseout);
   
