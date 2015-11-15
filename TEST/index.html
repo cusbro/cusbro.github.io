@@ -72,12 +72,13 @@ text {
 h1 {
     display: table;
     font: 30px sans-serif;
-    text-align: centre;
+    text-align: center;
     margin: 0 auto;
 }
 
 #mainDiagram {
     margin: 0 auto;
+    text-align: center;
 }
 
 #descwindow {
@@ -91,13 +92,13 @@ h1 {
 
 </style>	
 </head>
-<body id="mainBody" bgcolor="#D9E9FF" style="width:1000px">
+<body id="mainBody" bgcolor="#D9E9FF" style="width:80%">
     <div id="header" style="width:100%">
         <h1 >GOTO2015 - The Bottled Water Solution Landscape</h1>
     </div>
-    <div id="mainDiagram" style="width:800px">
+    <div id="mainDiagram" style="width:100%">
     </div>
-    <div id="descwindow" style="width:75%;display:none">
+    <div id="descwindow" style="width:600px;display:none">
         <h2 id="desctitle"></h2>
         <p id="descdesc"></p>
     </div>
@@ -218,6 +219,8 @@ console.log(data.outer.reduce(function(a,b) { return a + b.related_links.length;
 
 
 var diameter = 800;
+var total_height = 650;
+var total_width = 960;
 var rect_width = 150;
 var rect_height = 20;
 var circ_radius = 60;
@@ -238,7 +241,10 @@ mid = (data.outer.length/2.0)
 //rotational scalling for outer nodes
 var outer_x = d3.scale.linear()
     .domain([0, mid, mid, data.outer.length])
-    .range([circ_deg_offset + circ_deg_squeeze ,  180 + circ_deg_offset - circ_deg_squeeze*2, 180 + circ_deg_offset + circ_deg_squeeze , 360 + circ_deg_offset - circ_deg_squeeze*2]);
+    .range([circ_deg_offset + circ_deg_squeeze ,  
+        180 + circ_deg_offset - circ_deg_squeeze*2, 
+        180 + circ_deg_offset + circ_deg_squeeze , 
+        360 + circ_deg_offset - circ_deg_squeeze*2]);
 
 
 
@@ -316,10 +322,10 @@ var diagonal = d3.svg.diagonal()
 
 
 var svg = d3.select("#mainDiagram").append("svg")
-    .attr("width", diameter)
-    .attr("height", diameter-50)
+    .attr("width", total_width)
+    .attr("height", total_height)
   .append("g")
-    .attr("transform", "translate(" + diameter / 2 + "," + diameter / 2 + ")");
+    .attr("transform", "translate(" + total_width / 2 + "," + ( total_height / 2 )  + ")");
     
 
 // links
@@ -387,7 +393,7 @@ inode.append("text")
 
 // need to specify x/y/etc
 
-d3.select(self.frameElement).style("height", diameter + 150 + "px");
+d3.select(self.frameElement).style("height", total_height + 0 + "px");
 
 var mouseOverElement = false;
 var clickedElement;
