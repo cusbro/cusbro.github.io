@@ -36,12 +36,12 @@ text {
 
 .inner_node rect.highlight {
     stroke: #315B7E;
-    stroke-width: 2px;
+    stroke-width: 0px;
 }
 
 .inner_node rect.highlight_clicked {
     stroke: #315B7E;
-    stroke-width: 2px;
+    stroke-width: 0px;
 }
 
 .outer_node circle {
@@ -473,12 +473,9 @@ function nodeclick(d, inner)
     highlight(d, true);
     clickedElement = d;
 
-
-
     descbox = document.getElementById("descwindow");
     descboxtitle = document.getElementById("desctitle");
     descboxdesc = document.getElementById("descdesc");
-
 
     descboxtitle.innerHTML = d.name;
 
@@ -491,16 +488,18 @@ function nodeclick(d, inner)
         description = description + "<br><b>Related Solutions:</b>"
 
     for (var i=1; i < d.related_nodes.length; i++) {
-        var node = String(d.related_nodes[i]).substring(1);
+        var node;
         
         if (inner) {
-            description = description + '<br>' + search_2d(node, outer_data)[1];
+            node = String(d.related_nodes[i]).substring(1);
+            node = search_2d(node, outer_data)[1];
+            description = description + '<br>' + node;
         }
         else {
-            description = description + '<br>' + search_3d(node, inner_data)[1];
+            node = String(d.related_nodes[i]).substring(1);
+            node = search_3d(node, inner_data)[1];
+            description = description + '<br>' + node;
         }
-
-
         
     }
 
@@ -509,8 +508,6 @@ function nodeclick(d, inner)
 
     if (descbox.style.display === 'none')
         descbox.style.display = 'block';
-    //else
-      //  descbox.style.display = 'none';
 
 }
 
