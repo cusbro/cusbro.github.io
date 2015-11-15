@@ -475,10 +475,10 @@ function nodeclick(d, inner)
     var description = d.desc + '<br>';
 
     if (d.related_nodes.length > 0 && inner)
-        description = description + "<br>Stakeholders:"
+        description = description + "<br><b>Related Stakeholders:</b>"
 
     if (d.related_nodes.length > 0 && !inner)
-        description = description + "<br>Solutions:"
+        description = description + "<br><b>Related Solutions:</b>"
 
     for (var i=1; i < d.related_nodes.length; i++) {
         var node = String(d.related_nodes[i]).substring(1);
