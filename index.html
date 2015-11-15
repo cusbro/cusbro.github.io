@@ -90,6 +90,13 @@ h1 {
 
 }
 
+#citeWindow {
+    font: 15px sans-serif;
+    text-align: center;
+    margin: 0 auto;
+}
+
+
 </style>	
 </head>
 <body id="mainBody" bgcolor="#D9E9FF" style="width:960px">
@@ -101,6 +108,10 @@ h1 {
     <div id="descwindow" style="width:600px;display:none">
         <h2 id="desctitle"></h2>
         <p id="descdesc"></p>
+    </div>
+    <div id="citeWindow" style="width:600px;display:block">
+        <h2 id="citetitle">Bibliography <span id="citesymbol">[ + ]</span></h2>
+        <p id="citedesc" style="width:600px;display:none">citation information</p>
     </div>
 </body>
 <script src="http://d3js.org/d3.v3.min.js"></script>
@@ -528,7 +539,6 @@ function nodeclick(d, inner)
 
 }
 
-
 function backgroundclick(d)
 {
 
@@ -549,6 +559,30 @@ function backgroundclick(d)
 
 body = document.getElementById("mainBody");
 body.setAttribute("onclick", "javascript:backgroundclick();");
+
+
+function citeClick(d) {
+
+
+    var citedesc = document.getElementById("citedesc");
+    var citebox = document.getElementById("citeWindow")
+    var citesymbol = document.getElementById("citesymbol");
+
+    console.log(citebox);
+
+    if (citedesc.style.display === 'none') {
+        citedesc.style.display = 'block';
+        citebox.style.backgroundColor = '#ffffff';
+        citesymbol.innerHTML = "[ - ]";
+    }
+    else {
+        citedesc.style.display = 'none';
+        citebox.style.backgroundColor = 'transparent';
+        citesymbol.innerHTML = "[ + ]";
+    }
+}
+
+document.getElementById('citetitle').setAttribute("onclick", "javascript:citeClick();")
 
 </script>
 
