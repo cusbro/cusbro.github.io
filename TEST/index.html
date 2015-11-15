@@ -92,7 +92,7 @@ h1 {
 
 </style>	
 </head>
-<body id="mainBody" bgcolor="#D9E9FF" style="width:80%">
+<body id="mainBody" bgcolor="#D9E9FF" style="width:960px">
     <div id="header" style="width:100%">
         <h1 >GOTO2015 - The Bottled Water Solution Landscape</h1>
     </div>
@@ -445,6 +445,8 @@ function unhighlight(d, clicked)
     if (clicked)
         highlighter = 'highlight_clicked';
 
+   // d.classed(highlighter, false);
+
     for (var i = 0; i < d.related_nodes.length; i++)
     {
         d3.select('#' + d.related_nodes[i]).classed(highlighter, false);
@@ -524,8 +526,11 @@ function backgroundclick(d)
     if (mouseOverElement === true)
         return;
 
-    if (clickedElement)
+    if (clickedElement) {
         unhighlight(clickedElement, true);
+        unhighlight(clickedElement, false);
+    }
+
 
     descbox = document.getElementById("descwindow");
 
