@@ -410,7 +410,7 @@ d3.select(self.frameElement).style("height", total_height + 0 + "px");
 var mouseOverElement = false;
 var clickedElement;
 
-
+//prevent closure of description window while mouse is over it.
 document.getElementById('citeWindow').onmouseover = function (){ mouseOverElement = true; };
 document.getElementById('citeWindow').onmouseout = function (){ mouseOverElement = false; };
 document.getElementById('descWindow').onmouseover = function (){ mouseOverElement = true; };
@@ -538,7 +538,6 @@ function nodeclick(d, inner)
     }
 
     descboxdesc.innerHTML = description; 
-
 
     if (descbox.style.display === 'none')
         descbox.style.display = 'block';
