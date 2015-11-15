@@ -2,7 +2,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="name" content="GOTO2015 - The Bottled Water Solution Landscape" />
-	<meta name="description" content="A concept mapping of the bottled water solutions landscape"/>
+	<meta name="description" content="A concept map of the bottled water solutions landscape."/>
 	<meta name="mintags" content="2" />
 	<meta name="maxtags" content="2" />
 	<title>GOTO 2015 - Bottled Water</title>
@@ -404,11 +404,15 @@ inode.append("text")
     .text(function(d) { return d.name ; });
 
 // need to specify x/y/etc
-
 d3.select(self.frameElement).style("height", total_height + 0 + "px");
+
 
 var mouseOverElement = false;
 var clickedElement;
+
+
+document.getElementById('citeWindow').onmouseover = function (){ mouseOverElement = true; };
+document.getElementById('citeWindow').onmouseout = function (){ mouseOverElement = false; };
 
 function mouseover(d)
 {
@@ -565,10 +569,8 @@ function citeClick(d) {
 
 
     var citedesc = document.getElementById("citedesc");
-    var citebox = document.getElementById("citeWindow")
+    var citebox = document.getElementById("citeWindow");
     var citesymbol = document.getElementById("citesymbol");
-
-    console.log(citebox);
 
     if (citedesc.style.display === 'none') {
         citedesc.style.display = 'block';
@@ -582,7 +584,7 @@ function citeClick(d) {
     }
 }
 
-document.getElementById('citetitle').setAttribute("onclick", "javascript:citeClick();")
+document.getElementById('citetitle').onclick = function(){ citeClick() };
 
 </script>
 
