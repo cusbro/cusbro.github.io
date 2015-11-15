@@ -19,9 +19,15 @@ text {
 
 .inner_node rect {
     pointer-events: all;
+    stroke-width: 0px;
 }
 
 .inner_node rect.highlight {
+    stroke: #315B7E;
+    stroke-width: 2px;
+}
+
+.inner_node rect.highlight_clicked {
     stroke: #315B7E;
     stroke-width: 2px;
 }
@@ -39,7 +45,15 @@ text {
     stroke-width: 5px;
 }
 
-.link {
+.outer_node circle.highlight_clicked
+{
+    stroke: #315B7E;
+    stroke-width: 5px;
+}
+
+
+.link 
+{
     fill: none;
 }
 
@@ -71,7 +85,7 @@ h1 {
     </div>
     <div id="mainDiagram" style="width:800px">
     </div>
-    <div id="descwindow" style="width:60%;display:none">
+    <div id="descwindow" style="width:75%;display:none">
         <h2 id="desctitle"></h2>
         <p id="descdesc"></p>
     </div>
@@ -96,18 +110,18 @@ var outer_data = [
 ["So", "Social", "Social is nice to have"],
 ["Cn", "Consumers", "Consumers consumer consumable consumables"],
 ["Go", "Government", "Grrrrrr grovernment!"],
-["Cp", "Competition", "Grr competition"],
+["Sp", "Substitutes", "Grr competition"],
 ["Me", "Media", "Eve Binder"]
 ]
 
 
-var data = [
+var inner_data = [
 [["1" , "Solution 1", "Government", "IpsoFacto blah blah blah blah" ], ["In", "Cn"]], 
 [["2" , "Solution 2", "Government", "IpsoFacto blah blah blah blah" ], ["Cn", "Go"]],
 [["3" , "Solution 3", "Government", "IpsoFacto blah blah blah blah" ], ["Cn", "So", "Go"]],
-[["4" , "Solution 4", "Social", "IpsoFacto blah blah blah blah" ], ["Cp", "Go"]],
-[["5" , "Solution 5", "Social", "IpsoFacto blah blah blah blah" ], ["Cp", "So", "Go"]],
-[["6" , "Solution 6", "Social", "IpsoFacto blah blah blah blah" ], ["In", "Cn", "Go", "So", "Cp"]],
+[["4" , "Solution 4", "Social", "IpsoFacto blah blah blah blah" ], ["Sp", "Go"]],
+[["5" , "Solution 5", "Social", "IpsoFacto blah blah blah blah" ], ["Sp", "So", "Go"]],
+[["6" , "Solution 6", "Social", "IpsoFacto blah blah blah blah" ], ["In", "Cn", "Go", "So", "Sp"]],
 [["7" , "Solution 7", "Economic", "IpsoFacto blah blah blah blah" ], ["Cn", "Go"]],
 [["8" , "Solution 8", "Economic", "IpsoFacto blah blah blah blah" ], ["In", "Cn"]], 
 [["9" , "Solution 9", "Economic", "IpsoFacto blah blah blah blah" ], ["Cn", "Go"]],
@@ -130,12 +144,12 @@ var links = [];
 
 var outerId = [0];
 
-data.forEach(function(d){
+inner_data.forEach(function(d){
 	
 	if (d == null)
 		return;
 	
-	i = { id:  "i" + d[0][0], name: d[0][1], type: d[0][2], desc: d[0][3], related_links: [] };
+	i = { id:  'i' + d[0][0], name: d[0][1], type: d[0][2], desc: d[0][3], related_links: [] };
 	i.related_nodes = [i.id];
 	inner.push(i);
 	
@@ -266,6 +280,17 @@ function search_2d(id, array)
     return null;
 }
 
+function search_3d(id, array)
+{
+    for (var i=0, len = array.length; i < len; i++) {
+        if (array[i][0][0] === id) {
+            return array[i][0];
+        }
+    }
+
+    return null;
+}
+
 // Can't just use d3.svg.diagonal because one edge is in normal space, the
 // other edge is in radial space. Since we can't just ask d3 to do projection
 // of a single point, do it ourselves the same way d3 would do it.  
@@ -309,7 +334,7 @@ var onode = svg.append('g').selectAll(".outer_node")
     .attr("transform", function(d) { return "rotate(" + (d.x - 90) + ")translate(" + d.y + ")"; })
     .on("mouseover", mouseover)
     .on("mouseout", mouseout)
-    .on("click", nodeclick);
+    .on("click", outernodeclick);
   
 onode.append("circle")
     .attr('id', function(d) { return d.id })
@@ -336,7 +361,7 @@ var inode = svg.append('g').selectAll(".inner_node")
     .attr("transform", function(d, i) { return "translate(" + d.x +  "," + d.y + ")"})
     .on("mouseover", mouseover)
     .on("mouseout", mouseout)
-    .on("click", nodeclick);
+    .on("click", innernodeclick);
   
 inode.append('rect')
     .attr('width', rect_width)
@@ -355,45 +380,121 @@ inode.append("text")
 d3.select(self.frameElement).style("height", diameter + 150 + "px");
 
 var mouseOverElement = false;
+var clickedElement;
 
 function mouseover(d)
 {
-	// bring to front
-	d3.selectAll('.links .link').sort(function(a, b){ return d.related_links.indexOf(a.id); });	
-	
-    for (var i = 0; i < d.related_nodes.length; i++)
-    {
-        d3.select('#' + d.related_nodes[i]).classed('highlight', true);
-        d3.select('#' + d.related_nodes[i] + '-txt').attr("font-weight", 'bold');
-    }
-    
-    for (var i = 0; i < d.related_links.length; i++)
-        d3.select('#' + d.related_links[i]).attr('stroke-width', '5px');
     mouseOverElement = true;
+    highlight(d, false);
 }
 
 function mouseout(d)
-{   	
+{   
+
     mouseOverElement = false;
+    if (clickedElement === d)
+        return;
+
+    unhighlight(d, false);
+
+}
+
+function highlight(d, clicked)
+{
+    var highlighter = 'highlight';
+    if (clicked)
+        highlighter = 'highlight_clicked';
+
+    // bring to front
+    d3.selectAll('.links .link').sort(function(a, b){ return d.related_links.indexOf(a.id); }); 
+    
     for (var i = 0; i < d.related_nodes.length; i++)
     {
-        d3.select('#' + d.related_nodes[i]).classed('highlight', false);
+        d3.select('#' + d.related_nodes[i]).classed(highlighter, true);
+        d3.select('#' + d.related_nodes[i] + '-txt').attr("font-weight", 'bold');
+    }
+    
+    for (var i = 0; i < d.related_links.length; i++) {
+        //d3.select('#' + d.related_links[i]).attr('stroke-width', '5px');
+        var paths = d3.select('#' + d.related_links[i]);
+        paths.classed(highlighter, true);
+        paths.attr('stroke-width', '5px');
+
+    }
+}
+
+function unhighlight(d, clicked)
+{
+    var highlighter = 'highlight';
+    if (clicked)
+        highlighter = 'highlight_clicked';
+
+    for (var i = 0; i < d.related_nodes.length; i++)
+    {
+        d3.select('#' + d.related_nodes[i]).classed(highlighter, false);
         d3.select('#' + d.related_nodes[i] + '-txt').attr("font-weight", 'normal');
     }
     
-    for (var i = 0; i < d.related_links.length; i++)
-        d3.select('#' + d.related_links[i]).attr('stroke-width', link_width);
+    for (var i = 0; i < d.related_links.length; i++) {
+        //d3.select('#' + d.related_links[i]).attr('stroke-width', link_width);
+        var paths = d3.select('#' + d.related_links[i]);
+        paths.classed(highlighter, false);
+        paths.attr('stroke-width', '1px');
+    }
 }
 
-function nodeclick(d)
+function innernodeclick(d) {
+    nodeclick(d, true);
+}
+
+
+function outernodeclick(d) {
+    nodeclick(d, false);
+}
+
+function nodeclick(d, inner)
 {
+
+   if (clickedElement) {
+        unhighlight(clickedElement, true);
+        unhighlight(clickedElement, false);
+    }
+
+    highlight(d, true);
+    clickedElement = d;
+
+
+
     descbox = document.getElementById("descwindow");
     descboxtitle = document.getElementById("desctitle");
     descboxdesc = document.getElementById("descdesc");
 
 
     descboxtitle.innerHTML = d.name;
-    descboxdesc.innerHTML = d.desc ; 
+
+    var description = d.desc + '<br>';
+
+    if (d.related_nodes.length > 0 && inner)
+        description = description + "<br>Stakeholders:"
+
+    if (d.related_nodes.length > 0 && !inner)
+        description = description + "<br>Solutions:"
+
+    for (var i=1; i < d.related_nodes.length; i++) {
+        var node = String(d.related_nodes[i]).substring(1);
+        
+        if (inner) {
+            description = description + '<br>' + search_2d(node, outer_data)[1];
+        }
+        else {
+            description = description + '<br>' + search_3d(node, inner_data)[1];
+        }
+
+
+        
+    }
+
+    descboxdesc.innerHTML = description; 
 
 
     if (descbox.style.display === 'none')
@@ -406,10 +507,12 @@ function nodeclick(d)
 
 function backgroundclick(d)
 {
-    console.log(d);
-    if (mouseOverElement === true)
-        return
 
+    if (mouseOverElement === true)
+        return;
+
+    if (clickedElement)
+        unhighlight(clickedElement, true);
 
     descbox = document.getElementById("descwindow");
 
