@@ -9,6 +9,18 @@
 
 <style>
 
+//
+// 
+// (C) 2014 Dustin Spicuzza <dustin@virtualroadside.com>
+//
+// This work is licensed under the Creative Commons Attribution 4.0
+// International License. To view a copy of this license, visit
+// http://creativecommons.org/licenses/by/4.0/.
+//
+// Inspired by http://www.findtheconversation.com/concept-map/
+// Loosely based on http://bl.ocks.org/mbostock/4063550
+//
+
 svg {
     font: 12px sans-serif;
 }
@@ -92,17 +104,7 @@ h1 {
 </body>
 <script src="http://d3js.org/d3.v3.min.js"></script>
 <script>
-//
-// 
-// (C) 2014 Dustin Spicuzza <dustin@virtualroadside.com>
-//
-// This work is licensed under the Creative Commons Attribution 4.0
-// International License. To view a copy of this license, visit
-// http://creativecommons.org/licenses/by/4.0/.
-//
-// Inspired by http://www.findtheconversation.com/concept-map/
-// Loosely based on http://bl.ocks.org/mbostock/4063550
-//
+
 
 
 var outer_data = [
@@ -116,16 +118,21 @@ var outer_data = [
 
 
 var inner_data = [
-[["1" , "Solution 1", "Government", "IpsoFacto blah blah blah blah" ], ["I", "C"]], 
-[["2" , "Solution 2", "Government", "IpsoFacto blah blah blah blah" ], ["C", "G"]],
-[["3" , "Solution 3", "Government", "IpsoFacto blah blah blah blah" ], ["C", "So", "G"]],
-[["4" , "Solution 4", "Social", "IpsoFacto blah blah blah blah" ], ["Sp", "G"]],
-[["5" , "Solution 5", "Social", "IpsoFacto blah blah blah blah" ], ["Sp", "So", "G"]],
-[["6" , "Solution 6", "Social", "IpsoFacto blah blah blah blah" ], ["I", "C", "G", "So", "Sp"]],
-[["7" , "Solution 7", "Economic", "IpsoFacto blah blah blah blah" ], ["C", "G"]],
-[["8" , "Solution 8", "Economic", "IpsoFacto blah blah blah blah" ], ["I", "C"]], 
-[["9" , "Solution 9", "Economic", "IpsoFacto blah blah blah blah" ], ["C", "G"]],
-[["10", "Solution 10", "Economic", "IpsoFacto blah blah blah blah" ], ["C", "So", "G", "M"]]
+[["1" , "Government Solutions:", "Government", "Government initiatives to help reduce the impact of bottled water." ], []], 
+[["4" , "Solution 1", "Government", "IpsoFacto blah blah blah blah" ], ["I", "C"]], 
+[["5" , "Solution 2", "Government", "IpsoFacto blah blah blah blah" ], ["C", "G"]],
+[["6" , "Solution 3", "Government", "IpsoFacto blah blah blah blah" ], ["C", "So", "G"]],
+
+[["2" , "Social Solutions:", "Social", "Social forces that limit the impact of bottled water." ], []], 
+[["7" , "Solution 4", "Social", "IpsoFacto blah blah blah blah" ], ["Sp", "G"]],
+[["8" , "Solution 5", "Social", "IpsoFacto blah blah blah blah" ], ["Sp", "So", "G"]],
+[["9" , "Solution 6", "Social", "IpsoFacto blah blah blah blah" ], ["I", "C", "G", "So", "Sp"]],
+
+[["3" , "Economic Solutions:", "Economic", "Economic forces that help reduce the impact of bottled water." ], []], 
+[["10" , "Solution 7", "Economic", "IpsoFacto blah blah blah blah" ], ["C", "G"]],
+[["11" , "Solution 8", "Economic", "IpsoFacto blah blah blah blah" ], ["I", "C"]], 
+[["12" , "Solution 9", "Economic", "IpsoFacto blah blah blah blah" ], ["C", "G"]],
+[["13", "Solution 10", "Economic", "IpsoFacto blah blah blah blah" ], ["C", "So", "G", "M"]]
 ]
 
 
@@ -211,11 +218,11 @@ console.log(data.outer.reduce(function(a,b) { return a + b.related_links.length;
 
 
 var diameter = 800;
-var rect_width = 100;
+var rect_width = 150;
 var rect_height = 20;
 var circ_radius = 60;
 var circ_deg_offset = 30
-var circ_deg_squeeze = 10
+var circ_deg_squeeze = 15
 
 var link_width = "1px"; 
 
@@ -350,6 +357,7 @@ onode.append("text")
     .attr("text-anchor", "middle")
     .attr("transform", function(d) { return "rotate(" + -(d.x - 90) + ")translate(0)"; })
     .attr("font-size", "1.2em")
+    .attr("font-family", "sans-serif")
     .text(function(d) { return d.name; });
   
 // inner nodes
@@ -373,6 +381,8 @@ inode.append("text")
 	.attr('id', function(d) { return d.id + '-txt'; })
     .attr('text-anchor', 'middle')
     .attr("transform", "translate(" + rect_width/2 + ", " + rect_height * .75 + ")")
+    .attr("font-size", "0.8em")
+    .attr("font-family", "sans-serif")
     .text(function(d) { return d.name ; });
 
 // need to specify x/y/etc
@@ -474,10 +484,10 @@ function nodeclick(d, inner)
 
     var description = d.desc + '<br>';
 
-    if (d.related_nodes.length > 0 && inner)
+    if (d.related_nodes.length > 1 && inner)
         description = description + "<br><b>Related Stakeholders:</b>"
 
-    if (d.related_nodes.length > 0 && !inner)
+    if (d.related_nodes.length > 1 && !inner)
         description = description + "<br><b>Related Solutions:</b>"
 
     for (var i=1; i < d.related_nodes.length; i++) {
