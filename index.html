@@ -81,7 +81,7 @@ h1 {
     text-align: center;
 }
 
-#descwindow {
+#descWindow {
     font: 15px sans-serif;
     text-align: center;
     margin: 0 auto;
@@ -105,7 +105,7 @@ h1 {
     </div>
     <div id="mainDiagram" style="width:100%">
     </div>
-    <div id="descwindow" style="width:600px;display:none">
+    <div id="descWindow" style="width:600px;display:none">
         <h2 id="desctitle"></h2>
         <p id="descdesc"></p>
     </div>
@@ -413,6 +413,8 @@ var clickedElement;
 
 document.getElementById('citeWindow').onmouseover = function (){ mouseOverElement = true; };
 document.getElementById('citeWindow').onmouseout = function (){ mouseOverElement = false; };
+document.getElementById('descWindow').onmouseover = function (){ mouseOverElement = true; };
+document.getElementById('descWindow').onmouseout = function (){ mouseOverElement = false; };
 
 function mouseover(d)
 {
@@ -505,7 +507,7 @@ function nodeclick(d, inner)
     highlight(d, true);
     clickedElement = d;
 
-    descbox = document.getElementById("descwindow");
+    descbox = document.getElementById("descWindow");
     descboxtitle = document.getElementById("desctitle");
     descboxdesc = document.getElementById("descdesc");
 
@@ -555,7 +557,7 @@ function backgroundclick(d)
     }
 
 
-    descbox = document.getElementById("descwindow");
+    descbox = document.getElementById("descWindow");
 
     if (descbox.style.display === 'block')
         descbox.style.display = 'none';
