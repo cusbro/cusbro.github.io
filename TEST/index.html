@@ -54,13 +54,13 @@ text {
 .outer_node circle.highlight
 {
     stroke: #315B7E;
-    stroke-width: 5px;
+    stroke-width: 8px;
 }
 
 .outer_node circle.highlight_clicked
 {
     stroke: #315B7E;
-    stroke-width: 5px;
+    stroke-width: 4px;
 }
 
 
@@ -227,7 +227,8 @@ var circ_radius = 60;
 var circ_deg_offset = 30
 var circ_deg_squeeze = 15
 
-var link_width = "1px"; 
+var link_width = "2px"; 
+var link_width_highlighted = "8px";
 
 var il = data.inner.length;
 var ol = data.outer.length;
@@ -431,10 +432,9 @@ function highlight(d, clicked)
     }
     
     for (var i = 0; i < d.related_links.length; i++) {
-        //d3.select('#' + d.related_links[i]).attr('stroke-width', '5px');
         var paths = d3.select('#' + d.related_links[i]);
         paths.classed(highlighter, true);
-        paths.attr('stroke-width', '5px');
+        paths.attr('stroke-width', link_width_highlighted);
 
     }
 }
@@ -454,10 +454,20 @@ function unhighlight(d, clicked)
     }
     
     for (var i = 0; i < d.related_links.length; i++) {
-        //d3.select('#' + d.related_links[i]).attr('stroke-width', link_width);
         var paths = d3.select('#' + d.related_links[i]);
-        paths.classed(highlighter, false);
-        paths.attr('stroke-width', '1px');
+
+        if (highlighter === 'highlight' ) {
+            if (!( paths.classed('highlight_clicked'))) {
+                paths.classed(highlighter, false);
+                paths.attr('stroke-width', link_width);
+            }
+        }
+        else {
+            paths.classed(highlighter, false);
+            paths.attr('stroke-width', link_width);
+        }
+        
+
     }
 }
 
