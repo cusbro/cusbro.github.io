@@ -142,7 +142,7 @@ h1 {
 
 var outer_data = [
 ["I", "Industry", "Industry ins an industry"],
-["So", "Social", "Social is nice to have"],
+["So", "Advocacy", "Advocay groups are nice to have"],
 ["C", "Consumers", "Consumers consumer consumable consumables"],
 ["G", "Government", "Grrrrrr grovernment!"],
 ["Sp", "Substitutes", "Grr competition"],
@@ -151,7 +151,7 @@ var outer_data = [
 
 
 var inner_data = [
-[["1" , "Government Solutions", "Government", "Current government initiatives to help reduce the impact of bottled water." ,""], []], 
+[["1" , "Government Solutions", "Title", "Current government initiatives to help reduce the impact of bottled water." ,""], []], 
 
 [["4" , "Tougher Regulations", "Government", 
 "Align bottling regulations with more stringent laws governing municipal water provision.", 
@@ -169,27 +169,55 @@ var inner_data = [
 "Establish trade standards through organizations like the International Council of Bottled Water Associations (ICBWA) (link).",
 "There are no criteria for enforcement of these standards, and members are not audited for compliance."], ["I" ]],
 
-[["1000", "Title", "Government", 
+[["8", "Sensitivity to Scarcity", "Government", 
+"Limit groundwater extraction in areas suffering from serious water scarcity (link).",
+"Surface water scarcity is not the same as groundwater scarcity, so these regulations may be ill advised (CITATION). <br>Problem: Episodic restrictions may not deter long-term abuses of water (link)."], ["I", "G" ]],
+
+[["9", "Local Privatization", "Government", 
+"Support privatization of local bottled water production at stable market prices, thus raising revenue and creating jobs.",
+"Local production distracts from investment in sustainable infrastructure, and creates new environmental risks (link)."], ["I", "C", "G"]],
+
+[["10", "Water Rights", "Government", 
+"Oversee provision of water rights, so that access to reserves is well controlled.",
+"Water rights laws are often archaic, out-of-touch, and poorly enforced. <br>Governments often see water rights as a way to generate revenue and counter to public interest."], ["I", "C", "G"]],
+
+
+
+
+[["2" , "Economic Solutions", "Title", "Current economic forces that help reduce the impact of bottled water." ,""], []], 
+
+[["1003", "Title", "Economic", 
 "Solution",
 "Issues"], ["I", "So", "C", "G", "Sp", "M" ]],
 
-[["1000", "Title", "Government", 
-"Solution",
-"Issues"], ["I", "So", "C", "G", "Sp", "M" ]],
-
-[["1000", "Title", "Government", 
-"Solution",
-"Issues"], ["I", "So", "C", "G", "Sp", "M" ]],
-
-[["2" , "Social Solutions", "Social", "Global social forces that atttempt limit the impact of bottled water." ,""], []], 
 
 
 
-[["3" , "Economic Solutions", "Economic", "Current economic forces that help reduce the impact of bottled water." ,""], []], 
+[["3" , "Social Solutions", "Title", "Global social forces that atttempt limit the impact of bottled water." ,""], []], 
 
-[["1000", "Title", "Economic", 
-"Solution",
-"Issues"], ["I", "So", "C", "G", "Sp", "M" ]],
+[["31", "Sustainability Reports", "Social", 
+"Have companies publish sustainability reports to demonstrate transparency and accountability.",
+"These reports include only what bottling companies want to share (which usually isn’t much)."], ["I", "C" ]],
+
+[["32", "Media Attention", "Social", 
+"Use investigative journalism to raise consumer awareness about corporate abuses of water.",
+"Publications only cover these problems when they are newsworthy--and readers have a short attention span."], ["C", "M" ]],
+
+[["33", "Grassroots Activism", "Social", 
+"Harness online grassroots efforts (petitions, social media) to shame the industry into reform.",
+"These efforts are highly fragmented and disorganized, reducing the power of collective action."], ["I", "So", "C"]],
+
+[["34", "Lobby Government", "Social", 
+"Lobby governments to protect public water systems and reduce national reliance on bottled water (link).",
+"Lobbying counter-pressure by the bottling industry makes it hard to find friends in elected office. (link) "], ["I", "So", "G" ]],
+
+[["35", "Tap Water Education", "Social", 
+"Launch public awareness campaigns to inform consumers that tap water and bottled water are often the same.",
+"Consumers are attached to the idea of bottled water, and an effective national campaign has yet to be mounted."], ["So", "C" ]],
+
+
+
+
 
 ]
 
@@ -298,7 +326,7 @@ var total_height = 650;
 var total_width = 960;
 var rect_width = 150;
 var rect_height = 20;
-var circ_radius = 60;
+var circ_radius = 80;
 var circ_deg_offset = 30
 var circ_deg_squeeze = 15
 
@@ -344,6 +372,9 @@ function get_color(name)
 {
     var color = '#dddddd';
     switch(name) {
+        case "Title":
+            color = "transparent";
+            break;
         case "Government":
             color =  "#fdc086";
             break;
