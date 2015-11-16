@@ -92,14 +92,21 @@ h1 {
     text-align: center;
     margin: 0 auto;
     display: none;
-    background-color: #ffffff;
 
+}
+
+#descdesc {
+    background-color: #ffffff;
 }
 
 #citeWindow {
     font: 15px sans-serif;
     text-align: center;
     margin: 0 auto;
+}
+
+#citedesc {
+    background-color: #ffffff;
 }
 
 
@@ -116,12 +123,14 @@ h1 {
         <h2 id="desctitle"></h2>
         <p id="descdesc"></p>
     </div>
+    <br>
     <div id="citeWindow" style="width:600px;display:block">
         <h2 id="citetitle">Bibliography <span id="citesymbol">[ + ]</span></h2>
         <p id="citedesc" style="width:600px;display:none">citation information</p>
     </div>
 </body>
-<script src="http://d3js.org/d3.v3.min.js"></script>
+<script src="d3.v3.min.js"></script>
+<script src="jquery-1.11.3.js"></script>
 <script>
 
 
@@ -231,7 +240,7 @@ for (var i = 0; i < data.outer.length; ++i)
 		data.outer[i1++] = outer[i];
 }
 
-console.log(data.outer.reduce(function(a,b) { return a + b.related_links.length; }, 0) / data.outer.length);
+//console.log(data.outer.reduce(function(a,b) { return a + b.related_links.length; }, 0) / data.outer.length);
 
 
 
@@ -518,7 +527,6 @@ function nodeclick(d, inner)
     descboxtitle = document.getElementById("desctitle");
     descboxdesc = document.getElementById("descdesc");
 
-    descboxtitle.innerHTML = d.name;
 
     var description = d.desc + '<br>';
 
@@ -544,10 +552,12 @@ function nodeclick(d, inner)
         
     }
 
-    descboxdesc.innerHTML = description; 
+    if (desctitle === '')
+        console.log('hello');
+    descboxtitle.innerHTML = d.name;
+    descboxdesc.innerHTML = description;
+    $('#descWindow').slideDown(250);
 
-    if (descbox.style.display === 'none')
-        descbox.style.display = 'block';
 
 }
 
@@ -562,34 +572,30 @@ function backgroundclick(d)
         unhighlight(clickedElement, false);
     }
 
-
-    descbox = document.getElementById("descWindow");
-
-    if (descbox.style.display === 'block')
-        descbox.style.display = 'none';
+    $('#descWindow').slideUp(350);
 }
 
 body = document.getElementById("mainBody");
 body.setAttribute("onclick", "javascript:backgroundclick();");
 
+var citeDisplayed = false;
 
 function citeClick(d) {
 
 
-    var citedesc = document.getElementById("citedesc");
-    var citebox = document.getElementById("citeWindow");
-    var citesymbol = document.getElementById("citesymbol");
-
-    if (citedesc.style.display === 'none') {
-        citedesc.style.display = 'block';
-        citebox.style.backgroundColor = '#ffffff';
-        citesymbol.innerHTML = "[ - ]";
+    if (!citeDisplayed) {
+        $('#citedesc').slideDown(250, function() {
+            citesymbol.innerHTML = "[ - ]";
+        } );
+        citeDisplayed = true;
     }
     else {
-        citedesc.style.display = 'none';
-        citebox.style.backgroundColor = 'transparent';
-        citesymbol.innerHTML = "[ + ]";
+        $('#citedesc').slideUp(250, function() {
+            citesymbol.innerHTML = "[ + ]";
+        });
+        citeDisplayed = false;
     }
+
 }
 
 document.getElementById('citetitle').onclick = function(){ citeClick() };
