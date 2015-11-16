@@ -556,7 +556,7 @@ function nodeclick(d, inner)
         console.log('hello');
     descboxtitle.innerHTML = d.name;
     descboxdesc.innerHTML = description;
-    $('#descWindow').slideDown(250);
+    $('#descWindow').slideDown(400);
 
 
 }
@@ -572,7 +572,7 @@ function backgroundclick(d)
         unhighlight(clickedElement, false);
     }
 
-    $('#descWindow').slideUp(350);
+    $('#descWindow').slideUp(400);
 }
 
 body = document.getElementById("mainBody");
@@ -584,13 +584,13 @@ function citeClick(d) {
 
 
     if (!citeDisplayed) {
-        $('#citedesc').slideDown(250, function() {
+        $('#citedesc').slideDown(400, function() {
             citesymbol.innerHTML = "[ - ]";
         } );
         citeDisplayed = true;
     }
     else {
-        $('#citedesc').slideUp(250, function() {
+        $('#citedesc').slideUp(400, function() {
             citesymbol.innerHTML = "[ + ]";
         });
         citeDisplayed = false;
