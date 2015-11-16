@@ -151,25 +151,46 @@ var outer_data = [
 
 
 var inner_data = [
-[["1" , "Government Solutions", "Government", "Current government initiatives to help reduce the impact of bottled water." ], []], 
-[["4" , "Tougher Regulations", "Government", "<b>Solution:</b><br>Align bottling regulations with more stringent laws governing municipal water provision.<br><br><b>Issues:</b><br>Regulations are often poorly enforced or ignored entirely.(link). " ], ["I", "G"]], 
+[["1" , "Government Solutions", "Government", "Current government initiatives to help reduce the impact of bottled water." ,""], []], 
 
-[["5" , "Extraction Limits", "Government", "<b>Solution:</b>Reduce water extraction by imposing higher fees and licensing restrictions.<br><br><b>Issues:</b><br>Companies will charge higher prices to pass increased costs to consumers.<br>There is no infrastructure in place to track the extraction of non-renewable groundwater resources (link).<br>Expensive regulations will drive companies to other regions where laws are more lax (link)." ], ["I", "G"]],
+[["4" , "Tougher Regulations", "Government", 
+"Align bottling regulations with more stringent laws governing municipal water provision.", 
+"Regulations are often poorly enforced or ignored entirely.(link). " ], ["I", "G"]], 
 
-[["6" , "Solution 3", "Government", "<b>Solution:</b><br> <br><br><b>Issues</b><br>" ], ["C", "So", "G"]],
+[["5" , "Extraction Limits", "Government", 
+"Reduce water extraction by imposing higher fees and licensing restrictions.", 
+"Companies will charge higher prices to pass increased costs to consumers.<br>There is no infrastructure in place to track the extraction of non-renewable groundwater resources (link).<br>Expensive regulations will drive companies to other regions where laws are more lax (link)." ], ["I", "G"]],
 
-[["2" , "Social Solutions", "Social", "Global social forces that atttempt limit the impact of bottled water." ], []], 
+[["6" , "International Oversight", "Government", 
+"Create international regulatory standards to promote reduction in bottled water consumption.", 
+"There is currently no global authority on bottled water regulation, and regional regimes are extremely fragmented (CITATION)." ], ["G", "I"]],
 
-[["7" , "Solution 4", "Social", "<b>Solution:</b><br> <br><br><b>Issues</b><br>" ], ["Sp", "G"]],
-[["8" , "Solution 5", "Social", "<b>Solution:</b><br> <br><br><b>Issues</b><br>" ], ["Sp", "So", "G"]],
-[["9" , "Solution 6", "Social", "<b>Solution:</b><br> <br><br><b>Issues</b><br>" ], ["I", "C", "G", "So", "Sp"]],
+[["7", "Trade Standards", "Government", 
+"Establish trade standards through organizations like the International Council of Bottled Water Associations (ICBWA) (link).",
+"There are no criteria for enforcement of these standards, and members are not audited for compliance."], ["I" ]],
 
-[["3" , "Economic Solutions", "Economic", "Current economic forces that help reduce the impact of bottled water." ], []], 
+[["1000", "Title", "Government", 
+"Solution",
+"Issues"], ["I", "So", "C", "G", "Sp", "M" ]],
 
-[["10" , "Solution 7", "Economic", "<b>Solution:</b><br> <br><br><b>Issues</b><br>" ], ["C", "G"]],
-[["11" , "Solution 8", "Economic", "<b>Solution:</b><br> <br><br><b>Issues</b><br>" ], ["I", "C"]], 
-[["12" , "Solution 9", "Economic", "<b>Solution:</b><br> <br><br><b>Issues</b><br>" ], ["C", "G"]],
-[["13", "Solution 10", "Economic", "<b>Solution:</b><br> <br><br><b>Issues</b><br>" ], ["C", "So", "G", "M"]]
+[["1000", "Title", "Government", 
+"Solution",
+"Issues"], ["I", "So", "C", "G", "Sp", "M" ]],
+
+[["1000", "Title", "Government", 
+"Solution",
+"Issues"], ["I", "So", "C", "G", "Sp", "M" ]],
+
+[["2" , "Social Solutions", "Social", "Global social forces that atttempt limit the impact of bottled water." ,""], []], 
+
+
+
+[["3" , "Economic Solutions", "Economic", "Current economic forces that help reduce the impact of bottled water." ,""], []], 
+
+[["1000", "Title", "Economic", 
+"Solution",
+"Issues"], ["I", "So", "C", "G", "Sp", "M" ]],
+
 ]
 
 
@@ -193,7 +214,22 @@ inner_data.forEach(function(d){
 	if (d == null)
 		return;
 	
-	i = { id:  'i' + d[0][0], name: d[0][1], type: d[0][2], desc: d[0][3], related_links: [] };
+    var solution = d[0][3];
+    var issues = d[0][4];
+    var description = "";
+
+
+    if (issues === "") {
+        description = solution;
+    }
+    else {
+        description = "<b>Solution:</b><br>" + solution + "<br><br>";
+        description += "<b>Issues:</b><br>" + issues;
+
+    
+    }
+
+	i = { id:  'i' + d[0][0], name: d[0][1], type: d[0][2], desc: description, related_links: [] };
 	i.related_nodes = [i.id];
 	inner.push(i);
 	
@@ -208,6 +244,9 @@ inner_data.forEach(function(d){
 		
         if (o == null)
 		{
+
+
+
 			o = { name: d_curr[1],	id: 'o' + d_curr[0], desc: d_curr[2], related_links: [] };
 			o.related_nodes = [o.id];
 			outerId[0] = outerId[0] + 1;	
