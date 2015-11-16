@@ -89,13 +89,17 @@ h1 {
 
 #descWindow {
     font: 15px sans-serif;
-    text-align: center;
+    text-align: justify;
     margin: 0 auto;
     display: none;
+}
 
+#desctitle {
+    text-align: center;
 }
 
 #descdesc {
+    border: 5px solid #ffffff;
     background-color: #ffffff;
 }
 
@@ -107,6 +111,7 @@ h1 {
 
 #citedesc {
     background-color: #ffffff;
+    border: 5px solid #ffffff;
 }
 
 
@@ -126,11 +131,11 @@ h1 {
     <br>
     <div id="citeWindow" style="width:600px;display:block">
         <h2 id="citetitle">Bibliography <span id="citesymbol">[ + ]</span></h2>
-        <p id="citedesc" style="width:600px;display:none">citation information</p>
+        <p id="citedesc" style="display:none">citation information</p>
     </div>
 </body>
-<script src="d3.v3.min.js"></script>
-<script src="jquery-1.11.3.js"></script>
+<script src="resources\d3.v3.min.js"></script>
+<script src="resources\jquery-1.11.3.js"></script>
 <script>
 
 
@@ -146,17 +151,17 @@ var outer_data = [
 
 
 var inner_data = [
-[["1" , "Government Solutions:", "Government", "Government initiatives to help reduce the impact of bottled water." ], []], 
-[["4" , "Solution 1", "Government", "IpsoFacto blah blah blah blah" ], ["I", "C"]], 
-[["5" , "Solution 2", "Government", "IpsoFacto blah blah blah blah" ], ["C", "G"]],
+[["1" , "Government Solutions", "Government", "Current government initiatives to help reduce the impact of bottled water." ], []], 
+[["4" , "Tougher Regulations", "Government", "<b>Solution:</b><br>Align bottling regulations with more stringent laws governing municipal water provision.<br><br><b>Issues:</b><br>Regulations are often poorly enforced or ignored entirely.(link). " ], ["I", "G"]], 
+[["5" , "Extraction Limits", "Government", "<b>Solution:</b>Reduce water extraction by imposing higher fees and licensing restrictions.<br><br><b>Problems:</b><br>Companies will charge higher prices to pass increased costs to consumers.<br>There is no infrastructure in place to track the extraction of non-renewable groundwater resources (link).<br>Expensive regulations will drive companies to other regions where laws are more lax (link)." ], ["I", "G"]],
 [["6" , "Solution 3", "Government", "IpsoFacto blah blah blah blah" ], ["C", "So", "G"]],
 
-[["2" , "Social Solutions:", "Social", "Social forces that limit the impact of bottled water." ], []], 
+[["2" , "Social Solutions", "Social", "Global social forces that atttempt limit the impact of bottled water." ], []], 
 [["7" , "Solution 4", "Social", "IpsoFacto blah blah blah blah" ], ["Sp", "G"]],
 [["8" , "Solution 5", "Social", "IpsoFacto blah blah blah blah" ], ["Sp", "So", "G"]],
 [["9" , "Solution 6", "Social", "IpsoFacto blah blah blah blah" ], ["I", "C", "G", "So", "Sp"]],
 
-[["3" , "Economic Solutions:", "Economic", "Economic forces that help reduce the impact of bottled water." ], []], 
+[["3" , "Economic Solutions", "Economic", "Current economic forces that help reduce the impact of bottled water." ], []], 
 [["10" , "Solution 7", "Economic", "IpsoFacto blah blah blah blah" ], ["C", "G"]],
 [["11" , "Solution 8", "Economic", "IpsoFacto blah blah blah blah" ], ["I", "C"]], 
 [["12" , "Solution 9", "Economic", "IpsoFacto blah blah blah blah" ], ["C", "G"]],
