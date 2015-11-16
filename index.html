@@ -88,7 +88,7 @@ h1 {
 }
 
 #descWindow {
-    font: 15px sans-serif;
+    font: 12px sans-serif;
     text-align: justify;
     margin: 0 auto;
     display: none;
@@ -104,13 +104,15 @@ h1 {
 }
 
 #citeWindow {
-    font: 15px sans-serif;
+    font: 12px sans-serif;
     text-align: center;
     margin: 0 auto;
 }
 
 #citedesc {
+    font: 12px sans-serif;
     background-color: #ffffff;
+    text-align: left;
     border: 5px solid #ffffff;
 }
 
@@ -131,21 +133,20 @@ h1 {
     <br>
     <div id="citeWindow" style="width:600px;display:block">
         <h2 id="citetitle">Bibliography <span id="citesymbol">[ + ]</span></h2>
-        <p id="citedesc" style="display:none">citation information</p>
+        <p id="citedesc" style="display:none"></p>
     </div>
 </body>
 <script src="resources/d3.v3.min.js"></script>
 <script src="resources/jquery-1.11.3.js"></script>
 <script>
 
-
 var outer_data = [
-["I", "Industry", "Industry refers to the bottled water industry and their representative lobby groups. The largest examples are Coca Cola, PepsiCo, Nestle and Fiji Water and one of the main bottled water lobby groups is the International Bottled Water Association."],
-["A", "Advocacy", "Advocacy groups are those groups that are representing environmental or social interests."],
-["C", "Consumers", "People who purchase and consume bottled water and would be affected by a market change."],
-["G", "Government", "Different governmental groups is the countries where bottled water is produced and consumed."],
-["S", "Substitutes", "Competing industries who provide products and solutions that could be a substitute for bottled water. This includes producers of consumer water filters or self-filtering water bottles."],
-["M", "Media", "Media companies such as newspapers, websites, TV and magazines."]
+["I", "Industry", "Bottled water manufacturers and distributors, and their representative lobbying groups. Major corporate players include Coca Cola, PepsiCo, Nestle, and Fiji Water; they are represented in part by the International Bottled Water Association, a powerful trade lobby."],
+["A", "Advocacates", "Nonprofits and non-government organizations that represent environmental or social interests."],
+["C", "Consumers", "Individuals or businesses that purchase and consume bottled water and would be affected by a market change."],
+["G", "Government", "Legislators and regulators in the countries where bottled water is produced and/or consumed."],
+["S", "Substitutes", "Competing industries whose products and solutions could be substitutes for bottled water. This includes producers of consumer water filters and/or self-filtering water bottles."],
+["M", "Media", "Publications and news outlets like newspapers, websites, television programs, and magazines."]
 ]
 
 
@@ -154,59 +155,59 @@ var inner_data = [
 
 [["4" , "Tougher Regulations", "Government", 
 "Align bottling regulations with more stringent laws governing municipal water provision.", 
-"Regulations are often poorly enforced or ignored entirely.(link). " ], ["I", "G"]], 
+"Regulations are often poorly enforced or ignored entirely (Barnes & Cao, 2013). " ], ["I", "G"]], 
 
 [["5" , "Extraction Limits", "Government", 
 "Reduce water extraction by imposing higher fees and licensing restrictions.", 
-"Companies will charge higher prices to pass increased costs to consumers.<br>There is no infrastructure in place to track the extraction of non-renewable groundwater resources (link).<br>Expensive regulations will drive companies to other regions where laws are more lax (link)." ], ["I", "G"]],
+"Companies will charge higher prices to pass increased costs to consumers.<br>There is no infrastructure in place to track the extraction of non-renewable groundwater resources (Westervelt, 2015).<br>Expensive regulations will drive companies to other regions where laws are more lax (Liu, 2015)." ], ["I", "G"]],
 
 [["6" , "International Oversight", "Government", 
 "Create international regulatory standards to promote reduction in bottled water consumption.", 
-"There is currently no global authority on bottled water regulation, and regional regimes are extremely fragmented (CITATION)." ], ["G", "I"]],
+"There is currently no global authority on bottled water regulation, and regional regimes are extremely fragmented." ], ["G", "I"]],
 
 [["7", "Trade Standards", "Government", 
-"Establish trade standards through organizations like the International Council of Bottled Water Associations (ICBWA) (link).",
+"Establish trade standards through organizations like the International Council of Bottled Water Associations (ICBWA) (2003).",
 "There are no criteria for enforcement of these standards, and members are not audited for compliance."], ["I" ]],
 
 [["8", "Sensitivity to Scarcity", "Government", 
-"Limit groundwater extraction in areas suffering from serious water scarcity (link).",
-"Surface water scarcity is not the same as groundwater scarcity, so these regulations may be ill advised (CITATION). <br>Problem: Episodic restrictions may not deter long-term abuses of water (link)."], ["I", "G" ]],
+"Limit groundwater extraction in areas suffering from serious water scarcity (Tencer, 2013).",
+"Surface water scarcity is not the same as groundwater scarcity, so these regulations may be ill advised. <br>Problem: Episodic restrictions may not deter long-term abuses of water (Abel, 2015)."], ["I", "G" ]],
 
 [["9", "Local Privatization", "Government", 
 "Support privatization of local bottled water production at stable market prices, thus raising revenue and creating jobs.",
-"Local production distracts from investment in sustainable infrastructure, and creates new environmental risks (link)."], ["I", "C", "G"]],
+"Local production distracts from investment in sustainable infrastructure, and creates new environmental risks (Nkrumah, 2015)."], ["I", "C", "G"]],
 
 [["10", "Water Rights", "Government", 
 "Oversee provision of water rights, so that access to reserves is well controlled.",
-"Water rights laws are often archaic, out-of-touch, and poorly enforced. <br>Governments often see water rights as a way to generate revenue and counter to public interest."], ["I", "C", "G"]],
+"Water rights laws are often archaic, out-of-touch, and poorly enforced. <br>Governments often see water rights as a way to generate revenue, even when granting them would run counter to public interest (Vekshin, 2015)."], ["I", "C", "G"]],
 
 
 
 [["2" , "Economic Solutions", "Title", "Current economic forces that help reduce the impact of bottled water." ,""], []], 
 
 [["21", "Virtual Water Reduction", "Economic", 
-"Encourage bottled water companies to voluntarily reduce virtual water consumption in order to increase efficiency (link). ",
+"Encourage bottled water companies to voluntarily reduce virtual water consumption in order to increase efficiency (International Bottled Water Association, 2013). ",
 "Operational efficiency only goes so far; more robust solutions are needed. "], ["I", "C",]],
 
 [["22", "Market Incentives", "Economic", 
-"Establish market incentives and disincentives, like taxes and subsidies, to encourage bottlers to support the cost of water management programs (link).",
+"Establish market incentives and disincentives, like taxes and subsidies, to encourage bottlers to support the cost of water management programs (Agriculture and Agri-Food Canada, 2009).",
 "Consumers will bear the costs of these programs; those without access to clean tap water will be hit especially hard"], ["I", "C"]],
 
 [["23", "Average Cost Pricing", "Economic", 
-"Encourage bottling companies to charge prices based on their average cost (link).",
+"Encourage bottling companies to charge prices based on their average cost (Cantin, Shrubsole & Aït-Ouyahia, 2005).",
 "Differing average costs among companies may skew competition, and the benefits of price discrimination will be lost."], ["I", "A", "C", "G", "S", "M" ]],
 
 [["24", "Tariffs", "Economic", 
 "Impose tariffs on the importation of water to disincentivize global distribution.",
-"Existing tariffs vary widely and often include broad exemptions (link).<br>Trade limits harm smaller economies and those with pressing water needs."], ["I", "C", "G"]],
+"Existing tariffs vary widely and often include broad exemptions (U.S. International Trade Commission, 2006).<br>Trade limits harm smaller economies and those with pressing water needs."], ["I", "C", "G"]],
 
 [["25", "Market Competition", "Economic", 
-"Promote competition from filtration companies to give consumers more options and reduce bottlers’ market power (link).",
+"Promote competition from filtration companies to give consumers more options and reduce bottlers’ market power (Center for Disease Control and Prevention, 2003).",
 "The market doesn't view filtration as a substitute for bottled water."], ["I", "C"]],
 
 [["26", "Downstream Substitution", "Economic", 
-"Urge downstream consumers (hotels, restaurants, citizens) to save money by bottling their own water from the tap in reusable containers, reducing their reliance on big bottlers (link).",
-"Restaurants and cafes account for a small (<15%) and shrinking portion of the bottled water market, so the impact of this change might be limited (link)."], ["I", "C", "S" ]],
+"Urge downstream consumers (hotels, restaurants, citizens) to save money by bottling their own water from the tap in reusable containers, reducing their reliance on big bottlers (Whole World Water, 2014).",
+"Restaurants and cafes account for a small (<15%) and shrinking portion of the bottled water market, so the impact of this change might be limited (Trigle, 2015)."], ["I", "C", "S" ]],
 
 [["27", "Cyclical Economies", "Economic", 
 "Encourage the adoption of a cyclical economy through water recycling initiatives.",
@@ -217,40 +218,77 @@ var inner_data = [
 [["3" , "Social Solutions", "Title", "Global social forces that attempt limit the impact of bottled water." ,""], []], 
 
 [["31", "Sustainability Reports", "Social", 
-"Have companies publish sustainability reports to demonstrate transparency and accountability.",
-"These reports include only what bottling companies want to share (which usually isn’t much)."], ["I", "C" ]],
+"Have companies publish sustainability reports to demonstrate transparency and accountability (Nestle Waters, 2015).",
+"These reports include only what bottling companies want to share (which often isn’t much)."], ["I", "C" ]],
 
 [["32", "Media Attention", "Social", 
 "Use investigative journalism to raise consumer awareness about corporate abuses of water.",
-"Publications only cover these problems when they are newsworthy--and readers have a short attention span."], ["C", "M" ]],
+"Publications only cover these problems when they are newsworthy - and readers have short attention spans."], ["C", "M" ]],
 
 [["33", "Grassroots Activism", "Social", 
 "Harness online grassroots efforts (petitions, social media) to shame the industry into reform.",
 "These efforts are highly fragmented and disorganized, reducing the power of collective action."], ["I", "A", "C"]],
 
 [["34", "Lobby Government", "Social", 
-"Lobby governments to protect public water systems and reduce national reliance on bottled water (link).",
-"Lobbying counter-pressure by the bottling industry makes it hard to find friends in elected office. (link) "], ["I", "A", "G" ]],
+"Lobby governments to protect public water systems and reduce national reliance on bottled water (Corporate Accountability International, 2015).",
+"Lobbying counter-pressure by the bottling industry makes it hard to find friends in elected office (Rein, 2015). "], ["I", "A", "G" ]],
 
 [["35", "Tap Water Education", "Social", 
 "Launch public awareness campaigns to inform consumers that tap water and bottled water are often the same.",
 "Consumers are attached to the idea of bottled water, and an effective national campaign has yet to be mounted."], ["A", "C" ]],
 
+]
+
+var cite_data = [
+
+"Abel, J. (2015) <i>California fines bottled-water company for ignoring drought restrictions.</i> [Online]. 2015. ConsumerAffairs. Available from: http://www.consumeraffairs.com/news/california-fines-bottled-water-company-for-ignoring-drought-restrictions-090415.html [Accessed: 16 November 2015].", 
+
+"Agriculture and Agri-Food Canada (2009) <i>The Canadian Bottled Water Industry.</i> [Online]. 25 March 2009. Available from: http://www.agr.gc.ca/eng/industry-markets-and-trade/statistics-and-market-information/by-product-sector/processed-food-and-beverages/the-canadian-bottled-water-industry/?id=1171644581795 [Accessed: 16 November 2015].", 
+
+"Barnes, A. & Cao, W. (2013) <i>Muddy Waters: The Public Health Risks and Sustainability of Bottled Water in China.</i> Vermont Law Review. 38971.", 
+
+"Cantin, B., Shrubsole, D. & Aït-Ouyahia, M. (2005) <i>Using Economic Instruments for Water Demand Management: Introduction. Canadian Water Resources Journal. </i>[Online] 30 (January), 1–10. Available from: doi:10.4296/cwrj30011.", 
+
+"Center for Disease Control and Prevention (2003) <i>Household Water Treatment - Ceramic Filtration. Waterlines. </i>[Online] 21 (3), 15–18. Available from: doi:10.3362/0262-8104.2003.006.", 
+
+"Corporate Accountability International (2015) <i>Think Outside the Bottle.</i> [Online]. 2015. Available from: https://www.stopcorporateabuse.org/campaigns/challenge-corporate-control-water/think-outside-bottle [Accessed: 16 November 2015].", 
+
+"International Bottled Water Association (2013) <i>New Study Shows Bottled Water Industry has Low Water Use Ratio.</i> [Online]. Available from: http://www.bottledwater.org/new-study-shows-bottled-water-industry-has-low-water-use-ratio [Accessed: 16 November 2015].",
+
+"International Council of Bottled Water Associations (2003) <i>ICBWA Model Code.</i>",
+
+"Liu, H. (2015) <i>Bottled Water in China - Boom or Bust?</i>", 
+
+"Nestle Waters (2015) <i>Bottled Water Quality Reports.</i> [Online]. 2015. Available from: http://www.nestle-watersna.com/en/bottled-water-sources-and-quality/water-quality-reports [Accessed: 16 November 2015].", 
+
+"Nkrumah, D. (2015) <i>Mahama must resign; charge mayor with manslaughter.</i> [Online]. 2015. GhanaWeb. Available from: http://www.ghanaweb.com/GhanaHomePage/NewsArchive/Mahama-must-resign-charge-Mayor-with-manslaughter-PPP-Youth-361790 [Accessed: 16 November 2015].", 
+
+"Rein, L. (2015) <i>Park Service to Big Water: No federal funding for bottled water bans? We’ll find our own money, thanks.</i> [Online]. 2015. The Washington Post. Available from: https://www.washingtonpost.com/news/federal-eye/wp/2015/07/30/park-service-to-big-water-no-federal-funding-for-bottled-water-bans-well-find-our-own-money-thanks/ [Accessed: 16 November 2015].", 
+
+"Roach, J. (2015) <i>Ban Bottled Water? Industry Scrutinized in Parched California. </i>[Online]. 2015. CNBC. Available from: http://www.cnbc.com/2015/05/12/ban-bottled-water-industry-scrutinized-in-parched-california.html [Accessed: 16 November 2015].", 
+
+"Tencer, D. (2013) <i>Nestle Canada Water Dispute: Company Denies It Wants to Take Water During Times of Drought.</i> [Online]. 2013. The Huffington Post. Available from: http://www.huffingtonpost.ca/2013/06/04/nestle-canada-water-drought_n_3385472.html [Accessed: 16 November 2015].", 
+
+"Trigle, C. (2015) <i>Bottled Water Production in the UK.</i> (February).",
 
 
+"U.S. International Trade Commission (2006) <i>Harmonized Tariff Schedule of the United States.</i>", 
 
+"Vekshin, A. (2015) <i>Nestle Bottled-Water Plan Draws Fight in Drought-Stricken Oregon.</i> [Online]. 2015. Bloomberg News. Available from: http://www.bloomberg.com/politics/articles/2015-05-26/nestle-bottled-water-plan-draws-fight-in-drought-stricken-oregon [Accessed: 16 November 2015].", 
+
+"Westervelt, A. (2015) <i>Why are we drinking bottled water from the driest parts of California?</i> [Online]. 2015. The Guardian. Available from: http://www.theguardian.com/vital-signs/2015/apr/30/california-drought-bottled-water-nestle-arrowhead-starbucks [Accessed: 16 November 2015].", 
+
+"Whole World Water <i>(2014) Whole World Water.</i> [Online]. 2014. Available from: http://wholeworldwater.co/ [Accessed: 16 November 2015]."
 
 ]
 
 
 // transform the data into a useful representation
 // 1 is inner, 2, is outer
-
-// need: inner, outer, links
 //
 // inner: 
 // links: { inner: outer: }
-
+//citations
 
 var outer = d3.map();
 var inner = [];
@@ -274,8 +312,6 @@ inner_data.forEach(function(d){
     else {
         description = "<b>Solution:</b><br>" + solution + "<br><br>";
         description += "<b>Issues:</b><br>" + issues;
-
-    
     }
 
 	i = { id:  'i' + d[0][0], name: d[0][1], type: d[0][2], desc: description, related_links: [] };
@@ -296,7 +332,7 @@ inner_data.forEach(function(d){
 
 
 
-			o = { name: d_curr[1],	id: 'o' + d_curr[0], desc: d_curr[2], related_links: [] };
+			o = { name: d_curr[1],	id: 'o' + d_curr[0], desc: "<b>Stakeholder Description:</b><br>" + d_curr[2], related_links: [] };
 			o.related_nodes = [o.id];
 			outerId[0] = outerId[0] + 1;	
 			
@@ -326,6 +362,17 @@ outer = data.outer;
 data.outer = Array(outer.length);
 
 
+// citations
+var citation_text = "";
+cite_data.forEach( function(c) {
+
+    citation_text += "<br>" + c + "<br>";
+
+});
+
+document.getElementById("citedesc").innerHTML = citation_text;
+
+
 var i1 = 0;
 var i2 = outer.length - 1;
 
@@ -342,12 +389,12 @@ for (var i = 0; i < data.outer.length; ++i)
 
 
 
-var diameter = 750;
-var total_height = 600;
+var diameter = 800;
+var total_height = 650;
 var total_width = 960;
 var rect_width = 170;
 var rect_height = 20;
-var circ_radius = 60;
+var circ_radius = 65;
 var circ_deg_offset = 30
 var circ_deg_squeeze = 15
 
@@ -484,7 +531,7 @@ onode.append("circle")
 onode.append("circle")
     .attr('r', circ_radius)
     .attr('visibility', 'hidden');
-  
+
 onode.append("text")
 	.attr('id', function(d) { return d.id + '-txt'; })
     .attr("dy", ".31em")
@@ -493,9 +540,11 @@ onode.append("text")
     .attr("font-size", "1.2em")
     .attr("font-family", "sans-serif")
     .text(function(d) { return d.name; });
-  
+
+ 
+
 // inner nodes
-  
+
 var inode = svg.append('g').selectAll(".inner_node")
     .data(data.inner)
   .enter().append("g")
@@ -684,13 +733,13 @@ function citeClick(d) {
 
 
     if (!citeDisplayed) {
-        $('#citedesc').slideDown(400, function() {
+        $('#citedesc').slideDown(600, function() {
             citesymbol.innerHTML = "[ - ]";
         } );
         citeDisplayed = true;
     }
     else {
-        $('#citedesc').slideUp(400, function() {
+        $('#citedesc').slideUp(600, function() {
             citesymbol.innerHTML = "[ + ]";
         });
         citeDisplayed = false;
