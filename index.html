@@ -141,6 +141,8 @@ h1 {
 <script src="resources/jquery-1.11.3.js"></script>
 <script>
 
+
+//stakeholders
 var outer_data = [
 ["I", "Industry", "Bottled water manufacturers and distributors, and their representative lobbying groups. Major corporate players include Coca Cola, PepsiCo, Nestle, and Fiji Water; they are represented in part by the International Bottled Water Association, a powerful trade lobby."],
 ["A", "Advocates", "Nonprofits and non-government organizations that represent environmental or social interests."],
@@ -150,7 +152,7 @@ var outer_data = [
 ["M", "Media", "Publications and news outlets like newspapers, websites, television programs, and magazines."]
 ]
 
-
+//solutions/inner data
 var inner_data = [
 
 [["1" , "Government Solutions", "Title", "Current government initiatives to help reduce the impact of bottled water." ,""], []], 
@@ -242,6 +244,8 @@ var inner_data = [
 
 ]
 
+
+///bibliography
 var cite_data = [
 
 "Abel, J. (2015) <i>California fines bottled-water company for ignoring drought restrictions.</i> [Online]. 2015. ConsumerAffairs. Available from: http://www.consumeraffairs.com/news/california-fines-bottled-water-company-for-ignoring-drought-restrictions-090415.html [Accessed: 16 November 2015].", 
@@ -708,7 +712,7 @@ function nodeclick(d, inner)
         console.log('hello');
     descboxtitle.innerHTML = d.name;
     descboxdesc.innerHTML = description;
-    $('#descWindow').slideDown(400);
+    $('#descWindow').slideDown(250);
 
 
 }
@@ -724,7 +728,7 @@ function backgroundclick(d)
         unhighlight(clickedElement, false);
     }
 
-    $('#descWindow').slideUp(400);
+    $('#descWindow').slideUp(250);
 }
 
 body = document.getElementById("mainBody");
