@@ -10,15 +10,17 @@
 <style>
 
 //
-// 
-// (C) 2014 Dustin Spicuzza <dustin@virtualroadside.com>
+// (C) 2015 Marcus Schweizer <marcus.schweizer@gmail.com> 
+//
+// Inspired by and done with permission of Dustin Spicuzza <dustin@virtualroadside.com>
+// http://bl.ocks.org/virtuald/ea7438cb8c6913196d8e
 //
 // This work is licensed under the Creative Commons Attribution 4.0
 // International License. To view a copy of this license, visit
 // http://creativecommons.org/licenses/by/4.0/.
 //
 // Inspired by http://www.findtheconversation.com/concept-map/
-// Loosely based on http://bl.ocks.org/mbostock/4063550
+// and http://bl.ocks.org/virtuald/ea7438cb8c6913196d8e
 //
 
 svg {
@@ -62,7 +64,6 @@ text {
     stroke: #315B7E;
     stroke-width: 4px;
 }
-
 
 .link 
 {
@@ -200,7 +201,7 @@ var inner_data = [
 
 [["23", "Average Cost Pricing", "Economic", 
 "Encourage bottling companies to charge prices based on their average cost (Cantin, Shrubsole & Aït-Ouyahia, 2005).",
-"Differing average costs among companies may skew competition, and the benefits of price discrimination will be lost."], ["I", "A", "C", "G", "S", "M" ]],
+"Differing average costs among companies may skew competition, and the benefits of price discrimination will be lost."], ["I","G", "C" ]],
 
 [["24", "Tariffs", "Economic", 
 "Impose tariffs on the importation of water to disincentivize global distribution.",
@@ -402,8 +403,8 @@ var total_width = 960;
 var rect_width = 170;
 var rect_height = 20;
 var circ_radius = 65;
-var circ_deg_offset = 30
-var circ_deg_squeeze = 15
+var circ_deg_offset = 30;
+var circ_deg_squeeze = 20;
 
 var link_width = "2px"; 
 var link_width_highlighted = "8px";
