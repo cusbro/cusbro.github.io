@@ -136,7 +136,6 @@ h1 {
         <h2 id="citetitle">Bibliography <span id="citesymbol">[ + ]</span></h2>
         <p id="citedesc" style="display:none"></p>
     </div>
-    <div id="bottom"></div>
 </body>
 <script src="resources/d3.v3.min.js"></script>
 <script src="resources/jquery-1.11.3.js"></script>
@@ -743,8 +742,8 @@ function citeClick(d) {
     if (!citeDisplayed) {
         $('#citedesc').slideDown(600, function() {
             citesymbol.innerHTML = "[ - ]";
-
         } );
+
         citeDisplayed = true;
     }
     else {
@@ -753,6 +752,9 @@ function citeClick(d) {
         });
         citeDisplayed = false;
     }
+
+
+    
 
 }
 
