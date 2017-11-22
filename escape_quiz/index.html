@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Romy's Escape Room</title>
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
+
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/custom.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div id="wrapper">
+    <div class="qBox-outer">
+        <div class="qBox-inner">
+
+            <div id="qSheet-1" class="qSheet">
+                <input id="s1_password" type="password" placeholder="Enter password..." autofocus="autofocus" class="form-control">
+            </div>
+    
+            <div id="qSheet-2" class="qSheet">
+                <h2>Welcome Romy Ehrlich</h2>
+                <p>If you made it this far you must be a pretty smart lady, maybe you'd like to join us? 
+                    <br /> <br />
+                    <a href="https://jobs2.deloitte.com/au/en/search-results?keywords=health" target="_blank">https://jobs2.deloitte.com/au/en/search-results?keywords=health</a></p>
+                <br />
+                <button class="btn btn-white" onclick="qSheet_Next()">Maybe later...</button>
+                <button class="btn btn-white pull-right" onclick="qSheet_Start()">Start Again</button>
+            </div>
+
+            <div id="qSheet-3" class="qSheet">
+                <h2>Are you ready for round one?</h2>
+                <button class="btn btn-white" onclick="qSheet_Next()">Hurry up!</button>
+                <button class="btn btn-white pull-right" onclick="qSheet_Start()">Start Again</button>
+            </div>
+
+
+            <div id="qSheet-4" class="qSheet">
+                <h2>Time for Yogemon!</h2>
+                <p>What's Yogemon? simple, you pick is it a yoga position or is it a pokemon?</p>
+                <button class="btn btn-white" onclick="qSheet_Next()">Ok</button>
+                <button class="btn btn-white pull-right" onclick="qSheet_Start()">Start Again</button>
+            </div>
+
+            
+            <div id="qSheet-5" class="qSheet">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h2>Yogemon!</h2>
+                        <br />
+                        <p>Eevee</p>
+                        <br />
+                        <button class="btn btn-white" onclick="qSheet_Answer()">Yoga</button>
+                        <button class="btn btn-white" onclick="qSheet_Answer(true)">Pokemon</button>
+                        <button class="btn btn-white pull-right" onclick="qSheet_Start()">Start Again</button>
+                    </div>
+                    <div class="col-md-6">
+                        <img class="pull-right" id="yogemon_img-5" />
+                    </div>
+                </div>
+            </div>
+                
+    
+            <div id="qSheet-6" class="qSheet">
+                <div class="row">
+                    <div class="col-md-6">
+                <h2>Yogemon!</h2>
+                <br />
+                <p>Sphinx</p>
+                <br />
+                <button class="btn btn-white" onclick="qSheet_Answer(true)">Yoga</button>
+                <button class="btn btn-white" onclick="qSheet_Answer()">Pokemon</button>
+                <button class="btn btn-white pull-right" onclick="qSheet_Start()">Start Again</button>
+                    </div>
+                    <div class="col-md-6">
+                        <img class="pull-right" id="yogemon_img-6" />
+                    </div>
+                </div>
+
+            </div>
+
+            <div id="qSheet-7" class="qSheet">
+                <div class="row">
+                    <div class="col-md-6">
+                <h2>Yogemon!</h2>
+                <br />
+                <p>Lugia</p>
+                <br />
+                <button class="btn btn-white" onclick="qSheet_Answer()">Yoga</button>
+                <button class="btn btn-white" onclick="qSheet_Answer(true)">Pokemon</button>
+                <button class="btn btn-white pull-right" onclick="qSheet_Start()">Start Again</button>
+                    </div>
+                    <div class="col-md-6">
+                        <img class="pull-right" id="yogemon_img-7" />
+                    </div>
+                </div>
+            </div>
+
+            <div id="qSheet-8" class="qSheet">
+                <div class="row">
+                    <div class="col-md-6">
+                <h2>Yogemon!</h2>
+                <br />
+                <p>Dolphin</p>
+                <br />
+                <button class="btn btn-white" onclick="qSheet_Answer(true)">Yoga</button>
+                <button class="btn btn-white" onclick="qSheet_Answer()">Pokemon</button>
+                <button class="btn btn-white pull-right" onclick="qSheet_Start()">Start Again</button>
+                    </div>
+                    <div class="col-md-6">
+                        <img class="pull-right" id="yogemon_img-8" />
+                    </div>
+                </div>
+            </div>
+
+
+            <div id="qSheet-9" class="qSheet">
+                <div class="row">
+                    <div class="col-md-6">
+                <h2>Yogemon!</h2>
+                <br />
+                <p>Greninja</p>
+                <br />
+                <button class="btn btn-white" onclick="qSheet_Answer()">Yoga</button>
+                <button class="btn btn-white" onclick="qSheet_Answer(true)">Pokemon</button>
+                <button class="btn btn-white pull-right" onclick="qSheet_Start()">Start Again</button>
+                    </div>
+                    <div class="col-md-6">
+                        <img class="pull-right" id="yogemon_img-9" />
+                    </div>
+                </div>
+            </div>
+
+            <div id="qSheet-10" class="qSheet">
+                <div class="row">
+                    <div class="col-md-6">
+                <h2>Yogemon!</h2>
+                <br />
+                <p>Arceus</p>
+                <br />
+                <button class="btn btn-white" onclick="qSheet_Answer()">Yoga</button>
+                <button class="btn btn-white" onclick="qSheet_Answer(true)">Pokemon</button>
+                <button class="btn btn-white pull-right" onclick="qSheet_Start()">Start Again</button>
+                    </div>
+                    <div class="col-md-6">
+                        <img class="pull-right" id="yogemon_img-10" />
+                    </div>
+                </div>
+            </div>
+
+            <div id="qSheet-11" class="qSheet">
+                <div class="row">
+                    <div class="col-md-6">
+                <h2>Yogemon!</h2>
+                <br />
+                <p>Dhyana</p>
+                <br />
+                <button class="btn btn-white" onclick="qSheet_Answer(true)">Yoga</button>
+                <button class="btn btn-white" onclick="qSheet_Answer()">Pokemon</button>
+                <button class="btn btn-white pull-right" onclick="qSheet_Start()">Start Again</button>
+                    </div>
+                    <div class="col-md-6">
+                        <img class="pull-right" id="yogemon_img-11" />
+                    </div>
+                </div>
+            </div>
+
+            <div id="qSheet-12" class="qSheet">
+                <div class="row">
+                    <div class="col-md-6">
+                <h2>Yogemon!</h2>
+                <br />
+                <p>Bakasana</p>
+                <br />
+                <button class="btn btn-white" onclick="qSheet_Answer(true)">Yoga</button>
+                <button class="btn btn-white" onclick="qSheet_Answer()">Pokemon</button>
+                <button class="btn btn-white pull-right" onclick="qSheet_Start()">Start Again</button>
+                    </div>
+                    <div class="col-md-6">
+                        <img class="pull-right" id="yogemon_img-12" />
+                    </div>
+                </div>
+            </div>
+
+            <div id="qSheet-13" class="qSheet">
+                <h2>Great work!</h2>
+                <p>Very impressive, let's see of you can pass our next test</p>
+                <button class="btn btn-white" onclick="qSheet_Next()">Next</button>
+            </div>
+
+
+            <div id="qSheet-14" class="qSheet">
+                <div class="row">
+                    <div class="col-md-12">
+                <h2>Case Study!</h2>
+                <br />
+                <p>A large pharmaceutical production company is nearing the end if their patent life on a key drug Romylec. Romylec currently nets them $120m profit on $1.7bn global sales revenue every year. Should they:</p>
+                <br />
+                <select class="form-control" multiple="" style="height: 160px;">
+                    <option>Acquire all potential generic competitors</option>
+                    <option>Lobby the government to extend laws on patent lifetimes</option>
+                    <option>Forget Romylec and focus on new drug research and development</option>
+                    <option>Focus a heavy marketing and branding campaign to highlight Romylec's lifestyle benefits</option>
+                    <option>Add an addictive additive to Romylec to increase customer stickiness</option>
+                    <option>This list isn't even close to MECE, wtf?</option>
+                    <option>Do nothing</option>
+                </select>
+  
+                <br />
+                <button class="btn btn-white" onclick="qSheet_Next()">Submit</button>
+                <button class="btn btn-white pull-right" onclick="qSheet_Start()">Start Again</button>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div id="qSheet-15" class="qSheet">
+                <div class="row">
+                    <div class="col-md-12">
+                <h2>Correct!</h2>
+                <br />
+                <p>In consulting it doesn't matter what you say, as long as you say it with confidence.</p>
+                <br />
+                <button class="btn btn-white" onclick="qSheet_Next()">Next</button>
+                <button class="btn btn-white pull-right" onclick="qSheet_Start()">Start Again</button>
+                    </div>
+                </div>
+            </div>
+
+
+            <div id="qSheet-16" class="qSheet">
+                <h2>You passed the tests!</h2>
+                <p>Congratulations!</p>
+                <button class="btn btn-white" onclick="qSheet_Next()">Ok</button>
+            </div>
+
+
+            <div id="qSheet-17" class="qSheet">
+                <p>Yoga, pokemon and cases are pretty good, but our cross-denomination, detailed studies have found that true inner peace can be found where the ground is white, the sky is blue and big machines lift you from one into the other.</p>
+                <br />
+                <dl class="dl-horizontal">
+                    <dt>a</dt><dd>4</dd>
+                    <dt>b</dt><dd>5</dd>
+                    <dt>c</dt><dd>6</dd>
+                    <dt>d</dt><dd>1</dd>
+                    <dt>e</dt><dd>2</dd>
+                    <dt>f</dt><dd>3</dd>
+                    <dt>g</dt><dd>7</dd>
+                    <dt>h</dt><dd>8</dd>
+                    <dt>i</dt><dd>9</dd>
+                    <dt>j</dt><dd>1</dd>
+                    <dt>k</dt><dd>2</dd>
+                    <dt>l</dt><dd>3</dd>
+                    <dt>m</dt><dd>4</dd>
+                    <dt>n</dt><dd>5</dd>
+                    <dt>o</dt><dd>6</dd>
+                    <dt>p</dt><dd>7</dd>
+                    <dt>q</dt><dd>8</dd>
+                    <dt>r</dt><dd>9</dd>
+                    <dt>s</dt><dd>8</dd>
+                    <dt>t</dt><dd>6</dd>
+                    <dt>u</dt><dd>4</dd>
+                    <dt>v</dt><dd>2</dd>
+                    <dt>w</dt><dd>1</dd>
+                    <dt>x</dt><dd>3</dd>
+                    <dt>y</dt><dd>5</dd>
+                    <dt>z</dt><dd>7</dd>
+                </dl>   
+            </div>
+
+
+            <div id="qSheet-wrong" class="qSheet">
+                <h2>Whoops!</h2>
+                <p>I'm afraid that answer is incorrect, back to the start!</p>
+            </div>
+
+
+        </div>
+    </div>
+            <div>
+                 
+            </div>
+</div>
+
+<!-- Mainly scripts -->
+<script src="js/jquery-3.1.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+<!-- Custom and plugin javascript -->
+<script src="js/inspinia.js"></script>
+<script src="js/plugins/pace/pace.min.js"></script>
+
+<script type="text/javascript">
+
+window.pos = 1;
+window.posMax = 1;
+
+function qSheet_Start() {
+    
+    window.pos = 1; //starter position
+    
+    $('.qSheet').hide();
+    $('#qSheet-' + window.pos).fadeIn('slow');
+    while ($('#qSheet-' + (window.posMax + 1)).length > 0) {
+        window.posMax += 1;
+    }
+}
+
+function qSheet_Next() {
+    if (window.pos < window.posMax) {
+        current = '#qSheet-' + window.pos;
+        window.pos += 1;
+        next = '#qSheet-' + window.pos;
+        assign_yogemon(window.pos);
+
+        $(current).fadeOut('slow', function() {
+            $(next).fadeIn('slow');
+        });
+
+    }
+
+}
+
+function qSheet_Back() {
+    if (window.pos > 1) {
+        current = '#qSheet-' + window.pos;
+        window.pos -= 1;
+        prev = '#qSheet-' + window.pos;
+
+        $(current).fadeOut('slow', function() {
+            $(prev).fadeIn('slow');
+        });
+    }
+
+}
+
+
+function qSheet_Answer(correct) {
+    if (correct) {
+        qSheet_Next();
+    } else {
+        qSheet_Wrong();
+    }
+}
+
+function qSheet_Wrong() {
+    current = '#qSheet-' + window.pos;    
+    $(current).fadeOut('slow', function() {
+            $('#qSheet-wrong').fadeIn('slow');
+    });
+
+    setTimeout( function () {
+        $('.qSheet').fadeOut('slow');
+    }, 2500);
+
+    setTimeout( function() {
+        qSheet_Start();
+    }, 3000 );
+}
+
+function assign_yogemon(position) {
+    if (position >= 5 && position <= 12) {
+        var randomNum = Math.floor((Math.random()*10)+1);
+        $('#yogemon_img-' + position).attr('src', 'img/yogemon/img-' + randomNum + '.jpg');
+        $('#yogemon_img-' + position).width(250);
+        $('#yogemon_img-' + position).height(250);
+    }   
+}
+
+$(document).ready(function(){    
+
+    qSheet_Start();
+
+    $("#s1_password").on("change paste keyup", function(){
+        if ($("#s1_password").val() == "operAbridgE" && window.pos == 1) {     
+            
+            qSheet_Next();
+            setTimeout( function() {
+                $("#s1_password").val('');
+                }, 1000 );
+        }
+    });
+
+
+
+
+});
+
+</script>
+
+</body>
+
+</html>

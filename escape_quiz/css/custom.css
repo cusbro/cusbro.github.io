@@ -1,0 +1,27 @@
+
+.qBox-outer {
+	margin: 0 auto;
+	width: 100%;
+	height: 800px;
+	padding: 10px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	resize: both;
+	overflow: auto;
+	background-color: #fff;
+
+}
+
+.qBox-inner {
+	margin: 0 auto;
+	padding: 10px;
+	width: 60%;
+	overflow: auto;
+	overflow-y: hidden; overflow-x:hidden;
+}
+
+.qSheet {
+	display: none;
+}
+
